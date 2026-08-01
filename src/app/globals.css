@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme{
+    /* CORES */
+    --color-creme: #FDEBD9;
+    --color-offwhite: #FEE9E9;
+    --color-militar-100: #9F9C83;
+    --color-militar-300: #707458;
+    --color-militar-500: #414C2D;
+    --color-chocolate: #2E1E0F;
+    --color-oliva: #38351E;
+    
+    /* FONTES */
+    --font-dm-sans: var(--font-dm-sans);
+    --font-source: var(--font-source-sans);
+}
