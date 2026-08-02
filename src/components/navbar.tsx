@@ -14,9 +14,9 @@ export default function Navbar() {
         />
       </Link>
       <div className="flex gap-6 font-semibold text-chocolate">
-        <Link href="/">Home</Link>
-        <Link href="/menu">Produtos</Link>
-        <Link href="/contato">Contato</Link>
+        <Link href="/" className="transition-transform duration-300 ease-in-out hover:scale-120 hover:text-militar-500">Home</Link>
+        <Link href="/menu" className="transition-transform duration-300 ease-in-out hover:scale-120 hover:text-militar-500">Produtos</Link>
+        <Link href="/contato"  className="transition-transform duration-300 ease-in-out hover:scale-120 hover:text-militar-500">Contato</Link>
       </div>
       <div className="flex gap-6 left items-center">
         <Link href="">
