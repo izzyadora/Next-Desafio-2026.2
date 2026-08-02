@@ -8,8 +8,8 @@ export default function Navbar() {
         <Image
           src="/images/logo120x120.png"
           alt="Logo da Midori Café"
-          width={76}
-          height={76}
+          width={96}
+          height={96}
           className="transition-transform duration-300 ease-in-out hover:scale-120"
         />
       </Link>
