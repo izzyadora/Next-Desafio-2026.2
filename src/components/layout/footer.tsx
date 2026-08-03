@@ -10,28 +10,28 @@ import {
 
 export default function Footer() {
   const socialLinks = [
-    { name: 'Pinterest', href: '#', icon: FaPinterestP },
-    { name: 'Facebook', href: '#', icon: FaFacebookF },
-    { name: 'Instagram', href: '#', icon: FaInstagram },
-    { name: 'WhatsApp', href: '#', icon: FaWhatsapp },
-    { name: 'TikTok', href: '#', icon: FaTiktok },
+    { name: 'Pinterest', href: '#', icon: FaPinterestP, isFilled: true },
+    { name: 'Facebook', href: '#', icon: FaFacebookF, isFilled: true },
+    { name: 'Instagram', href: '#', icon: FaInstagram, isFilled: true },
+    { name: 'WhatsApp', href: '#', icon: FaWhatsapp, isFilled: true },
+    { name: 'TikTok', href: '#', icon: FaTiktok, isFilled: false },
   ];
 
   return (
-    <footer className="w-full bg-militar-500 text-white py-8 px-4 rounded-t-[3rem] font-dm-sans">
-      <div className="max-w-7xl mx-auto flex flex-col items-center gap-6">
-        
-        <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-creme rounded-full flex items-center justify-center p-2 border-2 border-militar-300 shadow-sm">
+    <footer className="w-full bg-militar-500 text-creme py-10 px-4 rounded-t-[2.5rem] md:rounded-t-[4rem] font-dm-sans">
+      <div className="max-w-4xl mx-auto flex flex-col items-center gap-6 md:gap-8">
+      
+        <div className="relative w-20 h-20 md:w-24 md:h-24 bg-creme rounded-full flex items-center justify-center p-3 shadow-sm">
           <Image
             src="/images/logo120x120.png"
             alt="Midori Café Logo" 
-            width={64}
-            height={64}
-            className="object-contain rounded-full"
+            width={80}
+            height={80}
+            className="object-contain"
           />
         </div>
 
-        <div className="flex items-center gap-4 sm:gap-6">
+        <div className="flex items-center gap-3 sm:gap-4">
           {socialLinks.map((social) => {
             const Icon = social.icon;
             return (
@@ -39,15 +39,19 @@ export default function Footer() {
                 key={social.name}
                 href={social.href}
                 aria-label={social.name}
-                className="w-8 h-8 flex items-center justify-center rounded-full text-creme hover:bg-white/10 hover:scale-110 transition-all duration-200"
+                className={`w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full transition-all duration-200 hover:scale-110 ${
+                  social.isFilled
+                    ? 'bg-creme text-militar-500 hover:bg-white'
+                    : 'text-creme hover:text-white'
+                }`}
               >
-                <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Icon className={social.isFilled ? 'w-4 h-4 sm:w-5 sm:h-5' : 'w-6 h-6 sm:w-7 sm:h-7'} />
               </Link>
             );
           })}
         </div>
 
-        <p className="text-[10px] sm:text-xs text-creme text-center font-light tracking-wide">
+        <p className="text-[11px] sm:text-xs text-creme/70 text-center font-light tracking-wide">
           Desafio de Tecnologia 2026.2 © Code Empresa Júnior de Computação
         </p>
 
