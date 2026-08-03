@@ -39,7 +39,7 @@ export default function Hero() {
       </div>
     
     {/* Card de informações */}
-      <div className="w-full bg-offwhite text-black rounded-[2.5rem] px-8 py-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-center shadow-lg">
+      <div className="w-full bg-white text-black rounded-[2.5rem] px-8 py-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-center shadow-lg">
         
 
         <div className="flex items-center gap-4">
