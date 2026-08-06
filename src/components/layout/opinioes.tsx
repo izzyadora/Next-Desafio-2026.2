@@ -9,7 +9,7 @@ interface PropsOpinioes {
 export default function Opinioes({
   titulo = "O que nossos clientes dizem",
   opinioes = OPINIOES_CLIENTES,
-}: PropsOpinioes) {
+  }: PropsOpinioes) {
   return (
     <section className="bg-offwhite w-full py-16 px-4 md:px-8">
       <div className="mx-auto max-w-6xl">
