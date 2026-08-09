@@ -14,3 +14,13 @@
     --font-dm-sans: var(--font-dm-sans);
     --font-source-serif: var(--font-source-serif);
 }
+
+.swiper-bullet-custom {
+  @apply inline-block h-2 w-2 rounded-full cursor-pointer transition-all duration-300 opacity-50;
+  background-color: var(--color-militar-100);
+}
+
+.swiper-bullet-active-custom {
+  @apply opacity-100 scale-125;
+  background-color: var(--color-militar-500);
+}
