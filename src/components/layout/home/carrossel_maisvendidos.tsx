@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
-import CardProduto, { Produto } from '@/src/components/ui/card_produto';
+import { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import CardProduto, { Produto } from "@/src/components/ui/card_produto";
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 interface PropsCarrosselProdutos {
   titulo: string;
@@ -47,7 +47,7 @@ export default function CarrosselProdutos({
         </div>
 
         {/* Swiper Container */}
-        <div className="relative px-6 md:px-10">
+        <div className="relative px-10">
           {/* Botão Anterior */}
           <button
             ref={refAnterior}
@@ -72,14 +72,14 @@ export default function CarrosselProdutos({
             slidesPerView={1}
             pagination={{
               clickable: true,
-              el: '.paginacao-carrossel-customizada',
+              el: ".paginacao-carrossel-customizada",
             }}
-            navigation={{
-              prevEl: refAnterior.current,
-              nextEl: refProximo.current,
-            }}
+
             onBeforeInit={(swiper) => {
-              if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
+              if (
+                swiper.params.navigation &&
+                typeof swiper.params.navigation !== "boolean"
+              ) {
                 swiper.params.navigation.prevEl = refAnterior.current;
                 swiper.params.navigation.nextEl = refProximo.current;
               }
@@ -96,6 +96,7 @@ export default function CarrosselProdutos({
             }}
             className="py-2"
           >
+            {/* Exibição dos produtos no carrossel */}
             {produtos.map((produto) => (
               <SwiperSlide key={produto.id} className="h-auto">
                 <CardProduto
@@ -107,7 +108,7 @@ export default function CarrosselProdutos({
           </Swiper>
 
           {/* Paginação */}
-          <div className="paginacao-carrossel-customizada mt-6 flex justify-center gap-1.5 [&_.swiper-pagination-bullet-active]:!bg-militar-500 [&_.swiper-pagination-bullet]:!bg-militar-100 [&_.swiper-pagination-bullet]:!opacity-100" />
+          <div className="paginacao-carrossel-customizada mt-6 flex justify-center gap-1.5 [&_.swiper-pagination-bullet-active]:bg-militar-500! [&_.swiper-pagination-bullet]:bg-militar-100 [&_.swiper-pagination-bullet]:opacity-100" />
         </div>
       </div>
     </section>

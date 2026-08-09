@@ -24,7 +24,7 @@ export default function Navbar() {
         {/* Links no desktop */}
         <div className="hidden md:flex gap-6 font-semibold text-chocolate">
           <Link href="/" className="transition-transform duration-300 ease-in-out hover:scale-110 hover:text-militar-500">Home</Link>
-          <Link href="/menu" className="transition-transform duration-300 ease-in-out hover:scale-110 hover:text-militar-500">Produtos</Link>
+          <Link href="/produtos" className="transition-transform duration-300 ease-in-out hover:scale-110 hover:text-militar-500">Produtos</Link>
           <Link href="/contato" className="transition-transform duration-300 ease-in-out hover:scale-110 hover:text-militar-500">Contato</Link>
         </div>
 

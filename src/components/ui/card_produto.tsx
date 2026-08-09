@@ -25,7 +25,7 @@ export default function CardProduto({ produto, aoAdicionarAoCarrinho }: PropsCar
   return (
     <div className="bg-creme text-chocolate flex h-full flex-col justify-between rounded-[24px] px-6 py-8 shadow-sm transition-all duration-300 hover:shadow-md">
       {/* Imagem */}
-      <div className="relative mb-4 aspect-square w-full overflow-hidden rounded-xl bg-white">
+      <div className="relative mb-4 aspect-square w-full overflow-hidden rounded-2xl bg-white">
         {produto.imagemUrl ? (
           <Image
             src={produto.imagemUrl}
@@ -34,7 +34,9 @@ export default function CardProduto({ produto, aoAdicionarAoCarrinho }: PropsCar
             className="object-cover"
           />
         ) : (
-          <div className="bg-offwhite h-full w-full" />
+          <div className="bg-offwhite h-full w-full">
+            <p>Imagem não encontrada!</p>
+          </div>
         )}
       </div>
 

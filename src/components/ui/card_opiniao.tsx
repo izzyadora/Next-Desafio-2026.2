@@ -8,7 +8,7 @@ interface PropsCardOpiniao {
 
 export default function CardOpiniao({ opiniao }: PropsCardOpiniao) {
   return (
-    <div className="bg-creme text-chocolate flex h-full flex-col justify-between rounded-2xl p-6 shadow-sm">
+    <div className="bg-creme text-chocolate flex flex-col justify-between rounded-2xl p-6 shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300 hover: cursor-pointer ">
       <div>
         <div className="bg-militar-300 text-militar-500 mb-4 flex h-10 w-10 items-center justify-center rounded-full">
           <Quote className="h-5 w-5 fill-current" />
