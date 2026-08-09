@@ -32,3 +32,7 @@ export const PRODUTOS_MAIS_VENDIDOS: Produto[] = [
     imagemUrl: "/images/panqueca.jpg",
   },
 ];
+
+export function getProdutoById(id: string): Produto | undefined {
+  return PRODUTOS_MAIS_VENDIDOS.find((produto) => produto.id === id);
+}
