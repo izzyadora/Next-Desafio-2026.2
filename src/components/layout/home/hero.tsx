@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="bg-offwhite text-creme flex flex-col justify-center gap-16 items-center">
+    <section className="bg-offwhite text-creme flex flex-col justify-center gap-16 items-center py-16 px-32">
       <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
         {/* Lado Esquerdo - Bloco de texto */}
         <div className="flex flex-col items-start gap-6 text-left max-w-120">
@@ -10,13 +10,12 @@ export default function Hero() {
             Descubra seu próximo café favorito!
           </h1>
 
-          <p className="font-dm-sans text-militar-500 text-lg opacity-90">
-            Explore nossa seleção de cafés especiais, lanches, acessórios e kits
-            para preparar a xícara perfeita.
+          <p className="font-dm-sans text-militar-500 text-[16px] opacity-90">
+            Explore nossa seleção de cafés especiais e lanches, sempre trazendo a xícara perfeita.
           </p>
 
           <button className="flex items-center gap-3 px-8 py-4 bg-chocolate text-creme font-dm-sans font-semibold rounded-full hover:cursor-pointer hover:bg-militar-500 transition-all duration-300 ease-in-out hover:scale-105">
-            <a href='/produtos' className="flex items-center gap-3">
+            <a href="/produtos" className="flex items-center gap-3">
               Explorar catálogo
               <span className="text-xl">⭢</span>
             </a>
