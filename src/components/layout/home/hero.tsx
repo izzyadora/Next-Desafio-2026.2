@@ -2,12 +2,11 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="bg-offwhite text-creme md:pt-6 lg:pt-12 flex flex-col justify-center gap-16 items-center">
+    <section className="bg-offwhite text-creme flex flex-col justify-center gap-16 items-center">
       <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-        {/* Lado Esquerdo */}
+        {/* Lado Esquerdo - Bloco de texto */}
         <div className="flex flex-col items-start gap-6 text-left max-w-120">
           <h1 className="font-source-serif font-bold text-chocolate text-5xl">
-          
             Descubra seu próximo café favorito!
           </h1>
 
@@ -24,7 +23,7 @@ export default function Hero() {
           </button>
         </div>
 
-        {/* Lado Direito*/}
+        {/* Lado Direito - Imagem */}
         <div className="flex justify-center w-full md:justify-end md:block">
           <div className="relative overflow-hidden">
             <Image
