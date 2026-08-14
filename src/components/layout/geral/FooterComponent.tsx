@@ -18,10 +18,9 @@ export default function Footer() {
   ];
 
   return (
-    <div className="bg-offwhite">
-      <footer className="w-full bg-militar-500 text-creme py-10 px-4 rounded-t-[2.5rem] md:rounded-t-[4rem] font-dm-sans">
+    <div className="bg-transparent">
+      <footer className="w-full bg-militar-500 text-creme py-10 px-4 font-dm-sans">
         <div className="max-w-4xl mx-auto flex flex-col items-center gap-6 md:gap-8">
-          {/* Imagem */}
           <div className="relative w-20 h-20 md:w-24 md:h-24 bg-creme rounded-full flex items-center justify-center p-3 shadow-sm">
             <Image
               src="/images/logo120x120.png"
@@ -58,17 +57,17 @@ export default function Footer() {
               );
             })}
           </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm sm:text-base">
+          <div className="flex flex-row gap-4 text-[0.6rem] sm:text-base">
             <a href="#" className="text-creme hover:text-white">
               Termos de uso
             </a>
+            <span>•</span>
             <a href="#" className="text-creme hover:text-white">
               Política de privacidade
             </a>
           </div>
 
-          <p className="text-[11px] sm:text-xs text-creme/70 text-center font-light tracking-wide">
+          <p className="text-[0.5rem] sm:text-xs text-creme/70 text-center font-light tracking-wide">
             Desafio de Tecnologia 2026.2 © Code Empresa Júnior de Computação
           </p>
         </div>

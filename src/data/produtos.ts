@@ -1,6 +1,6 @@
 // ARQUIVO PRA MOCKAR O CARROSSEL!
 
-import { Produto } from "@/src/components/ui/card_produto";
+import { Produto } from "@/src/components/ui/CardProduto";
 
 export const PRODUTOS_MAIS_VENDIDOS: Produto[] = [
   {

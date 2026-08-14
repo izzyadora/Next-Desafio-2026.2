@@ -2,7 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import CardProduto, { Produto } from "@/src/components/ui/card_produto";
+import CardProduto, { Produto } from "@/src/components/ui/CardProduto";
 
 import "swiper/css";
 import "swiper/css/navigation";

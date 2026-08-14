@@ -46,8 +46,9 @@ export default function Navbar() {
         {/* Botão hambúrguer */}
         <button 
           onClick={() => setIsOpen(!isOpen)} 
-          aria-label="Abrir menu"
-          className="md:hidden text-chocolate focus:outline-none p-2"
+          aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={isOpen}
+          className="md:hidden text-chocolate focus:outline-none p-2 relative z-50"
         >
           {isOpen ? (
             /* Ícone de Fechar */
@@ -65,7 +66,7 @@ export default function Navbar() {
 
       {/* Dropdown menu */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-creme shadow-lg flex flex-col gap-4 p-6 border-t border-chocolate/10">
+        <div className="md:hidden absolute top-full left-0 right-0 w-full bg-creme shadow-xl flex flex-col gap-4 p-6 border-t border-chocolate/10 z-50">
           <Link 
             href="/" 
             onClick={() => setIsOpen(false)}
@@ -74,7 +75,7 @@ export default function Navbar() {
             Home
           </Link>
           <Link 
-            href="/menu" 
+            href="/produtos" 
             onClick={() => setIsOpen(false)}
             className="font-semibold text-chocolate hover:text-militar-500 text-lg"
           >

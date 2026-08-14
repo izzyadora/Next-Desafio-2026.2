@@ -52,16 +52,14 @@ export default function CardProduto({ produto, aoAdicionarAoCarrinho }: PropsCar
         </div>
 
         <div className="flex items-center justify-between pt-2">
-          <span className="font-dm-sans text-[1.2rem] font-bold text-chocolate">
+          <span className="font-dm-sans text-[1rem] font-bold text-chocolate">
             {precoFormatado}
           </span>
 
           <button
             onClick={() => aoAdicionarAoCarrinho?.(produto)}
-            className="bg-militar-500 hover:bg-militar-300 flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium text-offwhite transition-colors font-dm-sans"
-          >
-            <ShoppingCart className="h-3 w-3" />
-            <span>Adicionar ao carrinho</span>
+            className="bg-militar-500 hover:bg-militar-300 rounded-lg p-3 font-medium text-offwhite transition-colors font-dm-sans">
+            <ShoppingCart className="h-4 w-4" />
           </button>
         </div>
       </div>

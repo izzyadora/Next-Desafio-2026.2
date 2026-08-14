@@ -1,8 +1,6 @@
-import Hero from "@/src/components/layout/home/hero";
-import CarrosselProdutos from "@/src/components/layout/home/mais_vendidos";
-import { PRODUTOS_MAIS_VENDIDOS } from "@/src/data/produtos";
-import SobreEmpresa from "@/src/components/layout/home/sobre_empresa";
-import Opinioes from "@/src/components/layout/home/opinioes";
+import Hero from "@/src/components/layout/home/HeroSection";
+import SobreEmpresa from "@/src/components/layout/home/SobreEmpresa";
+import Opinioes from "@/src/components/layout/home/Opinioes";
 
 export default function Home() {
   return (
@@ -10,11 +8,6 @@ export default function Home() {
       <div className="flex flex-col gap-0 m-0 p-0">
         <Hero />
         <SobreEmpresa />
-        <CarrosselProdutos
-          titulo="Mais vendidos"
-          linkVerTudo="/produtos"
-          produtos={PRODUTOS_MAIS_VENDIDOS}
-        />
         <Opinioes />
       </div>
     </main>

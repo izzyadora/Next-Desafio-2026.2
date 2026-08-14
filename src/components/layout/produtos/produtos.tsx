@@ -1,4 +1,4 @@
-import CarrosselProdutos from "@/src/components/layout/produtos/carrossel_produtos";
+import CarrosselProdutos from "@/src/components/layout/produtos/CarrosselProdutos";
 import { PRODUTOS_MAIS_VENDIDOS } from "@/src/data/produtos"; 
 
 export default function Produtos() {
