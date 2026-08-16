@@ -7,7 +7,6 @@ export default function Produtos() {
   return (
     <section className="bg-offwhite min-h-screen py-12 px-4 sm:px-8">
       <div className="max-w-7xl mx-auto space-y-8">
-        {/* Cabeçalho */}
         <div className="text-center">
           <h1 className="font-source-serif font-bold text-3xl sm:text-4xl text-chocolate">
             Produtos
@@ -17,14 +16,12 @@ export default function Produtos() {
           </p>
         </div>
 
-        {/* Quantidade de produtos encontrados */}
         <div>
           <p className="font-source-serif font-bold text-xl sm:text-2xl text-chocolate">
             {totalProdutos} produtos encontrados
           </p>
         </div>
 
-        {/* Carrossel de Produtos */}
         <CarrosselProdutos produtos={PRODUTOS} />
       </div>
     </section>

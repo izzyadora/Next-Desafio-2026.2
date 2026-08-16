@@ -36,7 +36,7 @@ export default function PaginaVisualizacao({ id: idProp }: PaginaVisualizacaoPro
             O produto que você procura não existe ou foi removido.
           </p>
           <Link
-            href="/"
+            href="/produtos"
             className="mt-2 inline-flex items-center gap-2 font-dm-sans text-sm text-militar-500 hover:text-oliva transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -50,7 +50,6 @@ export default function PaginaVisualizacao({ id: idProp }: PaginaVisualizacaoPro
   return (
     <main className="min-h-screen bg-offwhite">
       <div className="mx-auto max-w-5xl px-6 py-10 sm:py-14">
-        {/* Voltar */}
         <Link
           href="/"
           className="inline-flex items-center gap-2 font-dm-sans text-sm text-militar-300 hover:text-militar-500 transition-colors mb-8"
@@ -60,7 +59,6 @@ export default function PaginaVisualizacao({ id: idProp }: PaginaVisualizacaoPro
         </Link>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start animate-fade-in">
-          {/* Imagem */}
           <div className="relative w-full aspect-square rounded-2xl border border-militar-100/40 bg-offwhite overflow-hidden shadow-sm">
             <Image
               src={produto.imagemUrl}
@@ -72,7 +70,6 @@ export default function PaginaVisualizacao({ id: idProp }: PaginaVisualizacaoPro
             />
           </div>
 
-          {/* Detalhes */}
           <div className="flex flex-col pt-1 md:pt-4">
             <h1 className="font-source-serif font-bold text-3xl sm:text-4xl text-chocolate leading-tight">
               {produto.nome}
@@ -88,7 +85,6 @@ export default function PaginaVisualizacao({ id: idProp }: PaginaVisualizacaoPro
               {formatarPreco(produto.preco)}
             </p>
 
-            {/* Quantidade */}
             <div className="mt-8">
               <span className="font-dm-sans text-sm font-semibold text-chocolate">
                 Quantidade
@@ -123,7 +119,7 @@ export default function PaginaVisualizacao({ id: idProp }: PaginaVisualizacaoPro
 
             <div className="border-t border-militar-100/40 mt-8 mb-6" />
 
-            {/* Adicionar ao carrinho */}
+            {/* Adicionar ao carrinho (Linkar depois com o carrinho) */}
             <button
               type="button"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-militar-500 hover:bg-oliva text-creme font-dm-sans font-medium px-8 py-3.5 rounded-xl transition-colors cursor-pointer"

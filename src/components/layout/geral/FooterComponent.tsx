@@ -33,7 +33,6 @@ export default function Footer() {
             </Link>
           </div>
 
-          {/* Links de redes sociais */}
           <div className="flex items-center gap-3 sm:gap-4">
             {socialLinks.map((social) => {
               const Icon = social.icon;

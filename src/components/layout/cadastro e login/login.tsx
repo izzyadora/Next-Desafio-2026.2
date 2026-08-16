@@ -11,9 +11,8 @@ export default function Login() {
     <div className="bg-militar-300 z-[-1] w-full min-h-screen absolute p-4 sm:p-8 md:p-12 lg:p-24">
       <div className="font-dm-sans text-chocolate bg-creme z-0 rounded-3xl p-6 sm:p-10 md:p-16 max-w-225 w-full m-auto overflow-hidden">
         <div className="flex flex-col md:relative md:block md:min-h-130">
-          {/* Painel da imagem */}
           <div
-            className={`relative w-full h-40 sm:h-56 order-1 md:order-none md:absolute md:inset-y-0 md:w-1/2 md:h-auto transition-all duration-700 ease-in-out ${
+            className={`relative w-full h-40 sm:h-56 order-1 md:order-0 md:absolute md:inset-y-0 md:w-1/2 md:h-auto transition-all duration-700 ease-in-out ${
               isLogin ? "md:left-0" : "md:left-1/2"
             }`}
           >
@@ -28,7 +27,6 @@ export default function Login() {
             </div>
           </div>
 
-          {/* Painel do formulário */}
           <div
             className={`order-2 md:order-none w-full md:absolute md:inset-y-0 md:w-1/2 flex flex-col justify-center gap-4 mt-6 md:mt-0 px-0 md:px-8 transition-all duration-700 ease-in-out ${
               isLogin ? "md:left-1/2" : "md:left-0"
