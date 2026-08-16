@@ -7,6 +7,7 @@ import {
   FaPinterestP,
   FaPaperPlane,
 } from "react-icons/fa";
+import Link from "next/link";
 
 export default function ContatoPage() {
   return (
@@ -90,45 +91,45 @@ export default function ContatoPage() {
             </h2>
 
             <div className="space-y-4">
-              <a
+              <Link
                 href="#"
                 className="flex items-center gap-4 bg-white border border-chocolate/30 rounded-2xl p-5 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
               >
                 <FaInstagram className="text-2xl text-chocolate" />
                 <span>@midoricafe</span>
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="#"
                 className="flex items-center gap-4 bg-white border border-chocolate/30 rounded-2xl p-5 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
               >
                 <FaFacebookF className="text-xl text-chocolate" />
                 <span>Midori Café</span>
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="#"
                 className="flex items-center gap-4 bg-white border border-chocolate/30 rounded-2xl p-5 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
               >
                 <FaWhatsapp className="text-2xl text-chocolate" />
                 <span>(99) 99999-9999</span>
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="#"
                 className="flex items-center gap-4 bg-white border border-chocolate/30 rounded-2xl p-5 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
               >
                 <FaTiktok className="text-xl text-chocolate" />
                 <span>@midoricafe</span>
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="#"
                 className="flex items-center gap-4 bg-white border border-chocolate/30 rounded-2xl p-5 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
               >
                 <FaPinterestP className="text-xl text-chocolate" />
                 <span>@midoricafe_</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

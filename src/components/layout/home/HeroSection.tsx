@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import InfoCard from "@/src/components/ui/CardInformacao";
 
 export default function Hero() {
@@ -15,12 +16,13 @@ export default function Hero() {
             Explore nossa seleção de cafés especiais, lanches, acessórios e kits para preparar a xícara perfeita.
           </p>
 
-          <a 
+          <Link 
             href="/produtos" 
             className="inline-flex items-center gap-3 px-6 py-3.5 bg-chocolate text-sm lg:text-base text-creme font-dm-sans font-semibold rounded-full hover:bg-militar-500 transition-all duration-300 ease-in-out hover:scale-105"
           >
             Explorar catálogo <span className="text-lg">➔</span>
-          </a>
+          </Link>
+
         </div>
 
         {/* Lado Direito */}

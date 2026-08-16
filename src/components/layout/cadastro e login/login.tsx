@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -28,7 +29,7 @@ export default function Login() {
           </div>
 
           <div
-            className={`order-2 md:order-none w-full md:absolute md:inset-y-0 md:w-1/2 flex flex-col justify-center gap-4 mt-6 md:mt-0 px-0 md:px-8 transition-all duration-700 ease-in-out ${
+            className={`order-2 md:order-0 w-full md:absolute md:inset-y-0 md:w-1/2 flex flex-col justify-center gap-4 mt-6 md:mt-0 px-0 md:px-8 transition-all duration-700 ease-in-out ${
               isLogin ? "md:left-1/2" : "md:left-0"
             }`}
           >
@@ -67,12 +68,15 @@ export default function Login() {
                       Cadastre-se
                     </button>
                   </p>
-                  <button
-                    className="bg-militar-500 text-creme py-3 rounded-3xl"
-                    type="submit"
-                  >
-                    Entrar
-                  </button>
+
+                  <Link href="/tabela">
+                    <button
+                      className="bg-militar-500 text-creme py-3 w-full rounded-3xl hover:bg-militar-300 transition-colors"
+                      type="submit"
+                    >
+                      Entrar
+                    </button>
+                  </Link>
                 </>
               ) : (
                 <>
@@ -126,12 +130,14 @@ export default function Login() {
                       Faça login
                     </button>
                   </p>
-                  <button
-                    className="bg-militar-500 text-creme py-3 rounded-3xl"
-                    type="submit"
-                  >
-                    Cadastrar
-                  </button>
+                  <Link href="/tabela">
+                    <button
+                      className="bg-militar-500 text-creme py-3 w-full rounded-3xl hover:bg-militar-300 transition-colors"
+                      type="submit"
+                    >
+                      Cadastrar
+                    </button>
+                  </Link>
                 </>
               )}
             </div>

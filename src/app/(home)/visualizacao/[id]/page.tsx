@@ -1,5 +1,6 @@
 import PaginaVisualizacao from "@/src/components/layout/produtos/PaginaVisualizacao";
 
+
 export default function Visualizacao() {
     return(
         <main>
