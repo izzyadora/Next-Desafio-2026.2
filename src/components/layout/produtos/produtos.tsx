@@ -1,8 +1,8 @@
 import CarrosselProdutos from "@/src/components/layout/produtos/CarrosselProdutos";
-import { PRODUTOS_MAIS_VENDIDOS } from "@/src/data/produtos"; 
+import { PRODUTOS } from "@/src/data/produtos"; 
 
 export default function Produtos() {
-  const totalProdutos = PRODUTOS_MAIS_VENDIDOS.length;
+  const totalProdutos = PRODUTOS.length;
 
   return (
     <section className="bg-offwhite min-h-screen py-12 px-4 sm:px-8">
@@ -25,7 +25,7 @@ export default function Produtos() {
         </div>
 
         {/* Carrossel de Produtos */}
-        <CarrosselProdutos produtos={PRODUTOS_MAIS_VENDIDOS} />
+        <CarrosselProdutos produtos={PRODUTOS} />
       </div>
     </section>
   );

@@ -3,17 +3,18 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import CardProduto, { Produto } from "@/src/components/ui/CardProduto";
+import { PRODUTOS } from "@/src/data/produtos";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 interface CarrosselProdutosProps {
-  produtos: Produto[];
+  produtos?: Produto[];
 }
 
 export default function CarrosselProdutos({
-  produtos,
+  produtos = PRODUTOS,
 }: CarrosselProdutosProps) {
   const itensPorPagina = 16;
 
@@ -23,7 +24,7 @@ export default function CarrosselProdutos({
   );
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto px-4 py-6">
+    <div className="relative mx-auto w-full max-w-7xl px-4 py-6">
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={30}
@@ -33,53 +34,45 @@ export default function CarrosselProdutos({
           nextEl: ".swiper-button-next-custom",
         }}
         pagination={{
-          clickable: true,
           el: ".swiper-pagination-custom",
-          bulletClass: "swiper-bullet-custom",
-          bulletActiveClass: "swiper-bullet-active-custom",
+          clickable: true,
+          renderBullet: (index, className) => {
+            return `<span class="${className}">${index + 1}</span>`;
+          },
         }}
         className="w-full pb-6"
       >
         {paginasDeProdutos.map((pagina, index) => (
           <SwiperSlide key={index}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {pagina.map((produto) => (
-                <CardProduto key={produto.id} produto={produto} />
+                <div key={produto.id} className="h-full">
+                  <CardProduto produto={produto} />
+                </div>
               ))}
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* Navegação Inferior (Setas + Bolinhas) */}
-      <div className="flex items-center justify-center gap-4 mt-8 font-dm-sans text-militar-500">
+      {/* Paginação */}
+      <div className="text-militar-500 font-dm-sans mt-8 flex items-center justify-center gap-4">
         <button
           aria-label="Página anterior"
-          className="swiper-button-prev-custom text-xl font-bold cursor-pointer hover:text-militar-300 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          className="swiper-button-prev-custom hover:text-militar-300 cursor-pointer text-xl font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-30"
         >
           &lt;
         </button>
 
-        <div className="swiper-pagination-custom flex items-center justify-center gap-2"></div>
+        <div className="swiper-pagination-custom flex items-center justify-center gap-2" />
 
         <button
           aria-label="Próxima página"
-          className="swiper-button-next-custom text-xl font-bold cursor-pointer hover:text-militar-300 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          className="swiper-button-next-custom hover:text-militar-300 cursor-pointer text-xl font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-30"
         >
           &gt;
         </button>
       </div>
-
-      <Swiper
-        modules={[Navigation, Pagination]}
-        pagination={{
-          clickable: true,
-          el: ".swiper-pagination-custom",
-          bulletClass:
-            "inline-block h-2 w-2 rounded-full cursor-pointer transition-all duration-300 opacity-50 bg-militar-100",
-          bulletActiveClass: "!opacity-100 !scale-125 !bg-militar-500",
-        }}
-      ></Swiper>
     </div>
   );
 }

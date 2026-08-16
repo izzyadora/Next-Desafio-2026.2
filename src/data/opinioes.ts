@@ -9,21 +9,21 @@ export interface Opiniao {
 export const OPINIOES_CLIENTES: Opiniao[] = [
   {
     id: "1",
-    autor: "John D.",
+    autor: "Marcos V.",
     texto:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac efficitur urna, ut venenatis ante.",
     avaliacao: 5,
   },
   {
     id: "2",
-    autor: "John D.",
+    autor: "Áurea S.",
     texto:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac efficitur urna, ut venenatis ante.",
     avaliacao: 5,
   },
   {
     id: "3",
-    autor: "John D.",
+    autor: "Gabriella C.",
     texto:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac efficitur urna, ut venenatis ante.",
     avaliacao: 5,

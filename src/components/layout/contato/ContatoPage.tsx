@@ -10,7 +10,7 @@ import {
 
 export default function ContatoPage() {
   return (
-    <section className="bg-offwhite min-h-screen py-12 px-4 sm:px-6 lg:px-8 font-dm-sans text-chocolate">
+    <section className="bg-offwhite min-h-screen py-12 px-4 sm:px-6 lg:px-8 font-dm-sans text-chocolate animate-fade-in">
       <div className="max-w-5xl mx-auto space-y-10">
         {/* Cabeçalho */}
         <div className="text-center space-y-2">
