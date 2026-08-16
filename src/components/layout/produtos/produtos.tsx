@@ -9,9 +9,12 @@ export default function Produtos() {
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Cabeçalho */}
         <div className="text-center">
-          <h1 className="font-source-serif font-bold text-4xl sm:text-5xl text-chocolate">
+          <h1 className="font-source-serif font-bold text-3xl sm:text-4xl text-chocolate">
             Produtos
           </h1>
+          <p className="text-sm md:text-base text-militar-500 font-dm-sans">
+            Descubra o melhor que o Midori Café tem a oferecer!
+          </p>
         </div>
 
         {/* Quantidade de produtos encontrados */}

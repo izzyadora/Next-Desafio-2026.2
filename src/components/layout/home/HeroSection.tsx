@@ -3,33 +3,35 @@ import InfoCard from "@/src/components/ui/CardInformacao";
 
 export default function Hero() {
   return (
-    <section className="bg-offwhite text-creme">
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center py-12">
+    <section className="bg-offwhite text-creme w-full flex flex-col items-center justify-center min-h-[80vh] gap-12 px-4 sm:px-8 py-12">
+      <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Lado Esquerdo */}
-        <div className="flex flex-col items-center gap-4">
-          <h1 className="font-source-serif font-bold text-chocolate text-[2.2rem] text-center leading-none">
+        <div className="flex flex-col items-center md:items-start text-center md:text-left gap-6 max-w-lg mx-auto md:mx-0">
+          <h1 className="font-source-serif font-bold text-chocolate text-[2.5rem] lg:text-[3rem] leading-tight">
             Descubra seu próximo café favorito!
           </h1>
 
-          <p className="font-dm-sans text-militar-500 text-[0.8rem] text-center opacity-90">
-            Explore nossa seleção de cafés especiais e lanches, sempre trazendo
-            a xícara perfeita.
+          <p className="font-dm-sans text-militar-500 text-base lg:text-[1.125rem] opacity-90 max-w-md">
+            Explore nossa seleção de cafés especiais, lanches, acessórios e kits para preparar a xícara perfeita.
           </p>
 
-          <button className="flex items-center gap-3 px-4 py-3 bg-chocolate text-[0.7rem] text-creme font-dm-sans font-semibold rounded-full hover:cursor-pointer hover:bg-militar-500 transition-all duration-300 ease-in-out hover:scale-105">
-            <a href="/produtos" className="flex items-center gap-3"> Explorar catálogo </a>
-          </button>
+          <a 
+            href="/produtos" 
+            className="inline-flex items-center gap-3 px-6 py-3.5 bg-chocolate text-sm lg:text-base text-creme font-dm-sans font-semibold rounded-full hover:bg-militar-500 transition-all duration-300 ease-in-out hover:scale-105"
+          >
+            Explorar catálogo <span className="text-lg">➔</span>
+          </a>
         </div>
 
         {/* Lado Direito */}
-        <div className="flex justify-center hidden sm:block">
-          <div className="relative overflow-hidden">
+        <div className="hidden sm:flex justify-center md:justify-end w-full">
+          <div className="relative w-full max-w-170">
             <Image
               src="/images/imagem_principal.png"
               alt="Hero Image - Xícara de Café"
               width={680}
               height={440}
-              className="object-cover w-full h-auto"
+              className="w-full h-auto object-cover"
               priority
             />
           </div>

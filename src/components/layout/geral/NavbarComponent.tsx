@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [estaAtivo, setEstaAtivo] = useState(false);
 
   return (
     <nav className="relative bg-creme font-dm-sans px-8 py-2 z-50">
@@ -45,12 +45,12 @@ export default function Navbar() {
 
         {/* Botão hambúrguer */}
         <button 
-          onClick={() => setIsOpen(!isOpen)} 
-          aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
-          aria-expanded={isOpen}
+          onClick={() => setEstaAtivo(!estaAtivo)} 
+          aria-label={estaAtivo ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={estaAtivo}
           className="md:hidden text-chocolate focus:outline-none p-2 relative z-50"
         >
-          {isOpen ? (
+          {estaAtivo ? (
             /* Ícone de Fechar */
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -65,25 +65,25 @@ export default function Navbar() {
       </div>
 
       {/* Dropdown menu */}
-      {isOpen && (
+      {estaAtivo && (
         <div className="md:hidden absolute top-full left-0 right-0 w-full bg-creme shadow-xl flex flex-col gap-4 p-6 border-t border-chocolate/10 z-50">
           <Link 
             href="/" 
-            onClick={() => setIsOpen(false)}
+            onClick={() => setEstaAtivo(false)}
             className="font-semibold text-chocolate hover:text-militar-500 text-lg"
           >
             Home
           </Link>
           <Link 
             href="/produtos" 
-            onClick={() => setIsOpen(false)}
+            onClick={() => setEstaAtivo(false)}
             className="font-semibold text-chocolate hover:text-militar-500 text-lg"
           >
             Produtos
           </Link>
           <Link 
             href="/contato" 
-            onClick={() => setIsOpen(false)}
+            onClick={() => setEstaAtivo(false)}
             className="font-semibold text-chocolate hover:text-militar-500 text-lg"
           >
             Contato
@@ -94,15 +94,15 @@ export default function Navbar() {
           {/* Ações no Mobile */}
           <div className="flex items-center justify-between pt-2">
             <div className="flex gap-4 items-center">
-              <Link href="#" onClick={() => setIsOpen(false)}>
+              <Link href="#" onClick={() => setEstaAtivo(false)}>
                 <Image src="/icons/search_icon.svg" alt="Ícone de pesquisa" width={28} height={28} />
               </Link>
-              <Link href="/carrinho" onClick={() => setIsOpen(false)}>
+              <Link href="/carrinho" onClick={() => setEstaAtivo(false)}>
                 <Image src="/icons/shopping-cart.svg" alt="Ícone de carrinho" width={24} height={24} />
               </Link>
             </div>
 
-            <Link href="/login" onClick={() => setIsOpen(false)}>
+            <Link href="/login" onClick={() => setEstaAtivo(false)}>
               <button className="px-5 py-2 bg-militar-500 rounded-full text-creme font-semibold hover:bg-chocolate transition-colors">
                 Login
               </button>

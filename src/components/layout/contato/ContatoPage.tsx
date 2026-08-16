@@ -1,31 +1,29 @@
-'use client';
-import { 
-  FaInstagram, 
-  FaFacebookF, 
-  FaWhatsapp, 
-  FaTiktok, 
-  FaPinterestP, 
-  FaPaperPlane 
-} from 'react-icons/fa';
+"use client";
+import {
+  FaInstagram,
+  FaFacebookF,
+  FaWhatsapp,
+  FaTiktok,
+  FaPinterestP,
+  FaPaperPlane,
+} from "react-icons/fa";
 
 export default function ContatoPage() {
   return (
     <section className="bg-offwhite min-h-screen py-12 px-4 sm:px-6 lg:px-8 font-dm-sans text-chocolate">
       <div className="max-w-5xl mx-auto space-y-10">
-        
         {/* Cabeçalho */}
         <div className="text-center space-y-2">
           <h1 className="text-3xl md:text-4xl font-source-serif font-bold text-chocolate">
             Entre em contato com a gente!
           </h1>
           <p className="text-sm md:text-base text-militar-500 font-dm-sans">
-            lorem ipsum dolor sit amet
+            Vamos adorar receber sua mensagem, sugestão ou dúvida.
           </p>
         </div>
 
         {/* Formulário + Redes Sociais */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-creme border border-chocolate/20 rounded-2xl p-6 sm:p-8 shadow-sm">
             <h2 className="text-2xl font-source-serif font-bold text-center mb-6">
               Envie sua mensagem
@@ -86,7 +84,7 @@ export default function ContatoPage() {
           </div>
 
           {/* Card: Redes Sociais */}
-          <div className="bg-creme border border-[#2d221c]/20 rounded-2xl p-6 sm:p-8 shadow-sm">
+          <div className="flex flex-col gap-4 bg-creme border border-chocolate/20 rounded-2xl p-6 sm:p-8 shadow-sm">
             <h2 className="text-2xl font-source-serif font-bold text-center mb-6">
               Nossas redes
             </h2>
@@ -94,50 +92,49 @@ export default function ContatoPage() {
             <div className="space-y-4">
               <a
                 href="#"
-                className="flex items-center gap-4 bg-white border border-[#2d221c]/30 rounded-2xl p-3 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-4 bg-white border border-chocolate/30 rounded-2xl p-5 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
               >
-                <FaInstagram className="text-2xl text-[#2d221c]" />
+                <FaInstagram className="text-2xl text-chocolate" />
                 <span>@midoricafe</span>
               </a>
 
               <a
                 href="#"
-                className="flex items-center gap-4 bg-white border border-[#2d221c]/30 rounded-2xl p-3 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-4 bg-white border border-chocolate/30 rounded-2xl p-5 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
               >
-                <FaFacebookF className="text-xl text-[#2d221c]" />
+                <FaFacebookF className="text-xl text-chocolate" />
                 <span>Midori Café</span>
               </a>
 
               <a
                 href="#"
-                className="flex items-center gap-4 bg-white border border-[#2d221c]/30 rounded-2xl p-3 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-4 bg-white border border-chocolate/30 rounded-2xl p-5 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
               >
-                <FaWhatsapp className="text-2xl text-[#2d221c]" />
+                <FaWhatsapp className="text-2xl text-chocolate" />
                 <span>(99) 99999-9999</span>
               </a>
 
               <a
                 href="#"
-                className="flex items-center gap-4 bg-white border border-[#2d221c]/30 rounded-2xl p-3 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-4 bg-white border border-chocolate/30 rounded-2xl p-5 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
               >
-                <FaTiktok className="text-xl text-[#2d221c]" />
+                <FaTiktok className="text-xl text-chocolate" />
                 <span>@midoricafe</span>
               </a>
 
               <a
                 href="#"
-                className="flex items-center gap-4 bg-white border border-[#2d221c]/30 rounded-2xl p-3 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-4 bg-white border border-chocolate/30 rounded-2xl p-5 px-5 text-sm font-medium hover:bg-gray-50 transition-colors"
               >
-                <FaPinterestP className="text-xl text-[#2d221c]" />
+                <FaPinterestP className="text-xl text-chocolate" />
                 <span>@midoricafe_</span>
               </a>
             </div>
           </div>
-
         </div>
 
         {/* Card Localização */}
-        <div className="bg-creme border border-[#2d221c]/20 rounded-2xl p-6 sm:p-8 shadow-sm">
+        <div className="bg-creme border border-chocolate/20 rounded-2xl p-6 sm:p-8 shadow-sm">
           <h2 className="text-2xl font-source-serif font-bold text-center mb-6">
             Nossa Localização
           </h2>
@@ -157,30 +154,39 @@ export default function ContatoPage() {
             </div>
 
             {/* Informações de Endereço e Funcionamento */}
-            <div className="space-y-6 text-[#2d221c]">
+            <div className="space-y-6 text-chocolate">
               <div>
-                <h3 className="text-xl font-source-serif font-bold mb-2">Endereço</h3>
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  Rua dos Ipês Verdes, nº 248<br />
-                  Bairro Jardim das Araucárias<br />
-                  Juiz de Fora – MG<br />
+                <h3 className="text-xl font-source-serif font-bold mb-2">
+                  Endereço
+                </h3>
+                <p className="text-sm text-chocolate/70 leading-relaxed">
+                  Rua dos Ipês Verdes, nº 248
+                  <br />
+                  Bairro Jardim das Araucárias
+                  <br />
+                  Juiz de Fora – MG
+                  <br />
                   CEP: 36000-000
                 </p>
               </div>
 
               <div>
-                <h3 className="text-xl font-source-serif font-bold mb-2">Funcionamento</h3>
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  Segunda a Sexta: 08h00 às 19h00<br />
-                  Sábado: 09h00 às 18h00<br />
-                  Domingo: 09h00 às 13h00<br />
+                <h3 className="text-xl font-source-serif font-bold mb-2">
+                  Funcionamento
+                </h3>
+                <p className="text-sm text-chocolate/70 leading-relaxed">
+                  Segunda a Sexta: 08h00 às 19h00
+                  <br />
+                  Sábado: 09h00 às 18h00
+                  <br />
+                  Domingo: 09h00 às 13h00
+                  <br />
                   Feriados: 09h00 às 14h00
                 </p>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

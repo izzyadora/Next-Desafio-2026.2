@@ -22,13 +22,15 @@ export default function Footer() {
       <footer className="w-full bg-militar-500 text-creme py-10 px-4 font-dm-sans">
         <div className="max-w-4xl mx-auto flex flex-col items-center gap-6 md:gap-8">
           <div className="relative w-20 h-20 md:w-24 md:h-24 bg-creme rounded-full flex items-center justify-center p-3 shadow-sm">
-            <Image
-              src="/images/logo120x120.png"
-              alt="Midori Café Logo"
-              width={80}
-              height={80}
-              className="object-contain"
-            />
+            <Link href="/">
+              <Image
+                src="/images/logo120x120.png"
+                alt="Midori Café Logo"
+                width={80}
+                height={80}
+                className="object-contain"
+              />
+            </Link>
           </div>
 
           {/* Links de redes sociais */}
