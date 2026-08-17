@@ -1,18 +1,16 @@
 "use client";
 import Link from "next/link";
-import React from "react";
 import {
   SquareArrowRightExit,
   Menu,
   House,
   ShoppingCart,
   User,
-  Square,
 } from "lucide-react";
 
 export default function Sidebar() {
   return (
-    <div className="bg-chocolate font-dm-sans w-20 sm:w-48 h-screen flex flex-col rounded-r-3xl justify-between transition-all duration-300 z-100">
+    <div className="bg-chocolate font-dm-sans w-20 sm:w-48 h-screen flex flex-col rounded-r-3xl justify-between transition-all duration-300 z-9999">
       {/* topo */}
       <div className="flex justify-center text-offwhite p-6 hover:cursor-pointer transition-colors">
         <Menu className="h-7 w-7" />
