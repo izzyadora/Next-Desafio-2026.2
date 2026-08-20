@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 import CardProduto, { Produto } from "@/src/components/ui/CardProduto";
 import { PRODUTOS } from "@/src/data/produtos";
@@ -17,14 +19,22 @@ export default function CarrosselProdutos({
   produtos = PRODUTOS,
 }: CarrosselProdutosProps) {
   const itensPorPagina = 16;
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const paginasDeProdutos = Array.from(
     { length: Math.ceil(produtos.length / itensPorPagina) },
     (_, i) => produtos.slice(i * itensPorPagina, (i + 1) * itensPorPagina),
   );
 
+  const scrollParaTopo = () => {
+    containerRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
-    <div className="relative mx-auto w-full max-w-7xl px-4 py-6">
+    <div ref={containerRef} className="relative mx-auto w-full max-w-7xl px-4 py-6">
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={30}
@@ -39,6 +49,12 @@ export default function CarrosselProdutos({
           renderBullet: (index, className) => {
             return `<span class="${className}">${index + 1}</span>`;
           },
+        }}
+        onSlideChange={(swiper: SwiperType) => {
+          // evita rolar no carregamento inicial do slide
+          if (swiper.previousIndex !== undefined) {
+            scrollParaTopo();
+          }
         }}
         className="w-full pb-6"
       >
