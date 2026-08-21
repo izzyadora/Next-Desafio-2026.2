@@ -8,7 +8,7 @@ export default function Navbar() {
   const [estaAtivo, setEstaAtivo] = useState(false);
 
   return (
-    <nav className="relative bg-creme font-dm-sans px-8 py-2 z-50">
+    <nav className="relative bg-creme font-dm-sans px-8  z-50 border-b border-chocolate/20">
       <div className="flex items-center justify-between">
         {/* Logo */}
         <Link href="/">

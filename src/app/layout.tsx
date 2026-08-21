@@ -17,7 +17,7 @@ const sourceSerif = Source_Serif_4({
 
 const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['300', '400', '600'],
+  weight: ['200', '300', '400', '600', '700'],
   style: ['normal', 'italic'],
   variable: '--font-fraunces',
   display: 'swap',

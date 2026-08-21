@@ -9,7 +9,7 @@ export default function SobreEmpresa({
   pilares = PILARES_EMPRESA,
 }: PropsSobreEmpresa) {
   return (
-    <section className="flex flex-col gap-8 md:gap-12 w-full bg-white py-12 md:py-20 px-4 sm:px-8">
+    <section className="flex flex-col gap-8 md:gap-12 w-full bg-white py-12 md:py-20 px-4 sm:px-8 border-b border-chocolate/20">
       <div className="flex flex-col gap-2 max-w-2xl mx-auto text-center">
         <p className="font-dm-sans text-xs sm:text-sm text-militar-300 tracking-[0.15em] font-black uppercase">
           TRAZEMOS SABOR AO SEU DIA!

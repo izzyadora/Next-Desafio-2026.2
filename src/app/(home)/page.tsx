@@ -1,17 +1,15 @@
 import Hero from "@/src/components/layout/home/HeroSection";
 import SobreEmpresa from "@/src/components/layout/home/SobreEmpresa";
 import Opinioes from "@/src/components/layout/home/Opinioes";
-import CarrosselMaisVendidos from "@/src/components/layout/home/carrossel/CarrosselMaisVendidos";
-import getMaisVendidos from "@/actions/home/actions";
+import MaisVendidos from "@/src/components/layout/home/MaisVendidos";
 
-export default async function Home() {
-  const products = await getMaisVendidos();
+export default function Home() {
   
   return (
     <main>
       <Hero />
       <SobreEmpresa />
-      <CarrosselMaisVendidos products={products} />
+      <MaisVendidos />
       <Opinioes />
     </main>
   );
