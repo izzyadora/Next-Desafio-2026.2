@@ -9,12 +9,16 @@ import {
   FaPaperPlane,
 } from "react-icons/fa";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FormValue, formSchema } from "@/src/schema/form"
 import Link from "next/link";
 import Mapa from "./Mapa";
 
 export default function ContatoPage() {
+  const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
+  const [error, setError] = useState<string | null>(null)
+
   const {handleSubmit, register, formState:{errors}, reset} = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -24,7 +28,7 @@ export default function ContatoPage() {
   })
 
   const onSubmit = async (data: FormValue) => {
-    const response = await fetch("api/send",{
+    const response = await fetch("/api/send",{
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -33,10 +37,11 @@ export default function ContatoPage() {
     })
 
     if(response.ok){
+      setIsSubmitSuccessful(true);
       reset();
     }
     else{
-      console.log("Houve um erro.")
+      setError("Ocorreu um erro ao enviar o seu e-mail!")
     }
   }
 
@@ -115,6 +120,8 @@ export default function ContatoPage() {
               >
                 <FaPaperPlane className="text-xs" /> Enviar
               </button>
+              {isSubmitSuccessful && <span className="text-green-900 font-semibold">E-mail enviado com sucesso!</span>}
+              {error && <span className="text-red-950 font-semibold">Erro ao enviar o e-mail!</span>}
             </form>
           </div>
 

@@ -14,7 +14,7 @@ import {
   Tailwind,
   Text,
 } from "react-email";
-import tailwindConfig from "../tailwind.config";
+import tailwindConfig from "../../../tailwind.config";
 
 interface MidoriEmailProps {
   userFirstname: string;
@@ -42,7 +42,7 @@ export const MidoriEmail = ({
             alt="Midori Café"
             className="mx-auto"
           />
-          <Text className="text-[16px] leading-6.5">Hi {userFirstname},</Text>
+          <Text className="text-[16px] leading-6.5">Oi {userFirstname},</Text>
           <Text className="text-[16px] leading-6.5">
             Obrigada por entrar em contato com o Midori Café. Recebemos sua mensagem e nossa equipe irá analisá-la com atenção. 
 
