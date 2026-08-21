@@ -30,7 +30,7 @@ export default function Navbar() {
 
         {/* Ações no desktop */}
         <div className="hidden md:flex gap-6 items-center">
-          <Link href="#">
+          <Link href="/busca">
             <Image src="/icons/search_icon.svg" alt="Ícone de pesquisa" width={32} height={32} className="hover:scale-110 transition-transform duration-300" />
           </Link>
 
@@ -94,7 +94,7 @@ export default function Navbar() {
           {/* Ações no Mobile */}
           <div className="flex items-center justify-between pt-2">
             <div className="flex gap-4 items-center">
-              <Link href="#" onClick={() => setEstaAtivo(false)}>
+              <Link href="/busca" onClick={() => setEstaAtivo(false)}>
                 <Image src="/icons/search_icon.svg" alt="Ícone de pesquisa" width={28} height={28} />
               </Link>
               <Link href="/carrinho" onClick={() => setEstaAtivo(false)}>

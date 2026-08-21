@@ -1,4 +1,5 @@
 "use client";
+
 import {
   FaInstagram,
   FaFacebookF,
@@ -7,9 +8,38 @@ import {
   FaPinterestP,
   FaPaperPlane,
 } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { FormValue, formSchema } from "@/src/schema/form"
 import Link from "next/link";
+import Mapa from "./Mapa";
 
 export default function ContatoPage() {
+  const {handleSubmit, register, formState:{errors}, reset} = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: ""
+    }
+  })
+
+  const onSubmit = async (data: FormValue) => {
+    const response = await fetch("api/send",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data),
+    })
+
+    if(response.ok){
+      reset();
+    }
+    else{
+      console.log("Houve um erro.")
+    }
+  }
+
   return (
     <section className="bg-offwhite min-h-screen py-12 px-4 sm:px-6 lg:px-8 font-dm-sans text-chocolate animate-fade-in">
       <div className="max-w-5xl mx-auto space-y-10">
@@ -30,7 +60,7 @@ export default function ContatoPage() {
               Envie sua mensagem
             </h2>
 
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label className="block text-xs font-semibold text-gray-700 mb-1">
                   Nome completo
@@ -39,7 +69,9 @@ export default function ContatoPage() {
                   type="text"
                   placeholder="Seu nome completo"
                   className="w-full bg-white border border-chocolate/30 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-chocolate transition-colors"
+                  {...register("name")}
                 />
+                <label className="text-red-950">{errors.name?.message}</label>
               </div>
 
               <div>
@@ -50,7 +82,9 @@ export default function ContatoPage() {
                   type="email"
                   placeholder="seu.email@email.com"
                   className="w-full bg-white border border-chocolate/30 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-chocolate transition-colors"
+                  {...register("email")}
                 />
+                <label className="text-red-950">{errors.email?.message}</label>
               </div>
 
               <div>
@@ -76,7 +110,7 @@ export default function ContatoPage() {
               </div>
 
               <button
-                type="button"
+                type="submit"
                 className="w-full bg-chocolate hover:bg-militar-500 text-white font-medium py-3 rounded-full flex items-center justify-center gap-2 transition-colors mt-2 text-sm"
               >
                 <FaPaperPlane className="text-xs" /> Enviar
@@ -84,7 +118,7 @@ export default function ContatoPage() {
             </form>
           </div>
 
-          {/* Card: Redes Sociais */}
+          {/* Card Redes Sociais */}
           <div className="flex flex-col gap-4 bg-creme border border-chocolate/20 rounded-2xl p-6 sm:p-8 shadow-sm">
             <h2 className="text-2xl font-source-serif font-bold text-center mb-6">
               Nossas redes
@@ -141,18 +175,7 @@ export default function ContatoPage() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div className="w-full h-64 md:h-80 rounded-2xl overflow-hidden border border-[#2d221c]/20">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109169.6913076149!2d-115.80400715000002!3d37.25137145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80b81baaba3e8c81%3A0x970427e38e6237ae!2zw4FyZWEgNTEsIEOSVLCBFVUE!5e1!3m2!1spt-BR!2sbr!4v1785716932592!5m2!1spt-BR!2sbr"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-                title="Mapa de Localização"
-              ></iframe>
-            </div>
+            <Mapa />
 
             {/* Informações de Endereço e Funcionamento */}
             <div className="space-y-6 text-chocolate">
