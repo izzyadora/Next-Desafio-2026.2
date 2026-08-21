@@ -9,20 +9,16 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import CardProduto, { Produto } from "@/src/components/ui/CardProduto";
-import { PRODUTOS_MAIS_VENDIDOS } from "@/src/data/produtos";
+import CardProduto from "@/src/components/ui/CardProduto";
+import { Product } from "@/types/data";
 
-interface CarrosselMaisVendidosProps {
-  produtos?: Produto[];
-  aoAdicionarAoCarrinho?: (produto: Produto) => void;
-  redirecionarIndividual?: (produto: Produto) => void;
-}
+type MaisVendidosProps = {
+  products: Product[];
+};
 
-export default function CarrosselMaisVendidos({
-  produtos = PRODUTOS_MAIS_VENDIDOS,
-  aoAdicionarAoCarrinho,
-  redirecionarIndividual,
-}: CarrosselMaisVendidosProps) {
+
+
+export default function CarrosselMaisVendidos({products}: MaisVendidosProps) {
   return (
     <section className="w-full py-8">
       <div className="mx-auto max-w-7xl px-4">
@@ -35,6 +31,7 @@ export default function CarrosselMaisVendidos({
           </h2>
         </div>
 
+        {/* Carrossel */}
         <div className="relative pt-8">
           <button
             id="btn-prev-mais-vendidos"
@@ -86,13 +83,11 @@ export default function CarrosselMaisVendidos({
             }}
             className="pb-4"
           >
-            {produtos.map((produto) => (
-              <SwiperSlide key={produto.id} className="!h-auto">
+            {products.map((product) => (
+              <SwiperSlide key={product.id} className="!h-auto">
                 <div className="h-full">
                   <CardProduto
-                    produto={produto}
-                    aoAdicionarAoCarrinho={aoAdicionarAoCarrinho}
-                    redirecionarIndividual={redirecionarIndividual}
+                    product={product}
                   />
                 </div>
               </SwiperSlide>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Source_Serif_4 } from "next/font/google";
+import { DM_Sans, Source_Serif_4, Fraunces} from "next/font/google";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -13,6 +13,14 @@ const sourceSerif = Source_Serif_4({
   display: 'swap',
   weight: ['400', '600', '700'],
   variable: '--font-source-serif',
+});
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  weight: ['300', '400', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-fraunces',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -33,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body
-        className={`${dmSans.variable} ${sourceSerif.variable} antialiased`}
+        className={`${dmSans.variable} ${sourceSerif.variable} ${fraunces.variable} antialiased`}
       >
         {children}
       </body>

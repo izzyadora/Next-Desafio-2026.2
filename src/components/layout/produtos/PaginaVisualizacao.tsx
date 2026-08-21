@@ -3,19 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { ArrowLeft, Minus, Plus, ShoppingCart, PackageX } from "lucide-react";
-import { getProdutoById } from "@/src/data/produtos";
+import { ProductIndividual } from "@/types/data";
 
-interface PaginaVisualizacaoProps {
-  id?: string;
-}
-
-export default function PaginaVisualizacao({ id: idProp }: PaginaVisualizacaoProps) {
-  const params = useParams<{ id?: string }>();
-  const id = idProp ?? params?.id;
-
-  const produto = id ? getProdutoById(id) : undefined;
+export default function PaginaVisualizacao({product}: {product: ProductIndividual}) {
+  const produto = product;
   const [quantidade, setQuantidade] = useState(1);
 
   const aumentarQuantidade = () => setQuantidade((q) => Math.min(q + 1, 99));
@@ -61,8 +53,8 @@ export default function PaginaVisualizacao({ id: idProp }: PaginaVisualizacaoPro
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start animate-fade-in">
           <div className="relative w-full aspect-square rounded-2xl border border-militar-100/40 bg-offwhite overflow-hidden shadow-sm">
             <Image
-              src={produto.imagemUrl}
-              alt={produto.nome}
+              src={product?.image || "/images/placeholder.jpg"}
+              alt={product?.title || "Imagem do produto"}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
@@ -72,17 +64,17 @@ export default function PaginaVisualizacao({ id: idProp }: PaginaVisualizacaoPro
 
           <div className="flex flex-col pt-1 md:pt-4">
             <h1 className="font-source-serif font-bold text-3xl sm:text-4xl text-chocolate leading-tight">
-              {produto.nome}
+              {product?.title}
             </h1>
 
-            {produto.descricao && (
+            {product?.description && (
               <p className="font-dm-sans text-militar-300 mt-3 text-base leading-relaxed">
-                {produto.descricao}
+                {product?.description}
               </p>
             )}
 
             <p className="font-dm-sans font-bold text-2xl sm:text-3xl text-oliva mt-6">
-              {formatarPreco(produto.preco)}
+              {formatarPreco(product?.price || 0)}
             </p>
 
             <div className="mt-8">
