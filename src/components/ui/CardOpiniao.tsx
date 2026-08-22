@@ -23,12 +23,13 @@ export default function CardOpiniao({ opiniao }: PropsCardOpiniao) {
 
       <div className="mt-6 flex items-center gap-3">
         {/* Foto do usuário */}
-        <div className="bg-chocolate relative h-10 w-10 overflow-hidden rounded-full flex-shrink-0">
+        <div className="bg-chocolate relative h-10 w-10 overflow-hidden rounded-full shrink-0">
           {opiniao.fotoUrl && (
             <Image
               src={opiniao.fotoUrl}
               alt={opiniao.autor}
-              fill
+              width = {120}
+              height = {120}
               className="object-cover"
             />
           )}
@@ -45,7 +46,7 @@ export default function CardOpiniao({ opiniao }: PropsCardOpiniao) {
                 key={index}
                 className={`h-3.5 w-3.5 ${
                   index < opiniao.avaliacao
-                    ? "fill-amber-400 text-amber-400"
+                    ? "fill-militar-300 text-amber-400"
                     : "fill-gray-300 text-gray-300"
                 }`}
               />

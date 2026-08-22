@@ -1,8 +1,10 @@
 import "dotenv/config";
-import { PrismaClient } from "../generated/prisma/client";
+import { PrismaClient } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
+import { Pool } from "pg";
 
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
@@ -44,7 +46,7 @@ async function main() {
       title: "Panqueca Americana Clássica",
       description: "Acompanha manteiga cremosa e bastante xarope de bordo.",
       price: 19.9,
-      image: "/images/panqueca_normal.jpg",
+      image: "images/panqueca_normal.jpg",
     },
     {
       title: "Panqueca de Blueberry Dupla",
@@ -140,9 +142,11 @@ async function main() {
     },
   ];
 
-  await prisma.product.createMany({
-    data: products,
-  });
+  for (const product of products) {
+    await prisma.product.create({
+      data: product,
+    });
+  }
 }
 
 main()
@@ -152,4 +156,5 @@ main()
   })
   .finally(async () => {
     await prisma.$disconnect();
+    await pool.end();
   });

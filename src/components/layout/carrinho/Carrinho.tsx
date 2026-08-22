@@ -14,8 +14,20 @@ interface ItemCarrinho {
 }
 
 const CARRINHO_MOCK: ItemCarrinho[] = [
-  { id: "p1", nome: "Panqueca de Blueberry", imagemUrl: "/images/panqueca_blueberry.jpg", preco: 24.99, quantidade: 2 },
-  { id: "p2", nome: "Cinnamon Roll", imagemUrl: "/images/cinnamonroll.jpg", preco: 16.90, quantidade: 2 },
+  {
+    id: "p1",
+    nome: "Panqueca de Blueberry",
+    imagemUrl: "/images/panqueca_blueberry.jpg",
+    preco: 24.99,
+    quantidade: 2,
+  },
+  {
+    id: "p2",
+    nome: "Cinnamon Roll",
+    imagemUrl: "/images/cinnamonroll.jpg",
+    preco: 16.9,
+    quantidade: 2,
+  },
 ];
 
 const formataDinheiro = (valor: number) =>
@@ -31,7 +43,7 @@ export default function PaginaCarrinho() {
         if (item.id !== id) return item;
         const novaQtd = Math.min(Math.max(item.quantidade + diferenca, 1), 99);
         return { ...item, quantidade: novaQtd };
-      })
+      }),
     );
   };
 
@@ -41,22 +53,22 @@ export default function PaginaCarrinho() {
 
   const subtotal = useMemo(
     () => itens.reduce((soma, item) => soma + item.preco * item.quantidade, 0),
-    [itens]
+    [itens],
   );
-  
+
   const frete = 0;
   const total = subtotal + frete;
 
   return (
     <section className="bg-offwhite min-h-screen py-12 px-4 sm:px-6 lg:px-8 font-dm-sans text-chocolate">
       <div className="max-w-5xl mx-auto space-y-10">
-        
         <header className="text-center space-y-2">
           <h1 className="text-3xl md:text-4xl font-source-serif font-bold">
             Carrinho
           </h1>
           <p className="text-sm md:text-base text-militar-500">
-            Confira os produtos que você adicionou ao seu carrinho e finalize sua compra.
+            Confira os produtos que você adicionou ao seu carrinho e finalize
+            sua compra.
           </p>
         </header>
 
@@ -201,7 +213,9 @@ function ItensCarrinho({
       </div>
 
       <span className="text-sm sm:text-base font-bold md:text-right">
-        <span className="md:hidden text-militar-300 mr-1 font-normal">Total:</span>
+        <span className="md:hidden text-militar-300 mr-1 font-normal">
+          Total:
+        </span>
         {formataDinheiro(item.preco * item.quantidade)}
       </span>
 

@@ -6,52 +6,52 @@ export enum Role {
 }
 
 export type Product = {
-  id?: number;
+  id: number;
   title: string;
   description?: string;
   image?: string | null;
   price: number;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
   itemsCart?: ItemCart[];
 }
 export type ProductIndividual = {
-  id?: number;
+  id: number;
   title: string;
-  description?: string;
-  image?: string | null;
+  description: string;
+  image: string | null;
   price: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-  itemsCart?: ItemCart[];
+  createdAt: Date;
+  updatedAt: Date;
+  itemsCart: ItemCart[];
 } | null;
 
 
 export type User = {
-  id?: number;
-  name?: string;
-  email?: string;
-  password?: string;
-  role?: Role;
-  createdAt?: Date;
-  updatedAt?: Date;
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: Role;
+  createdAt: Date;
+  updatedAt: Date;
   cart?: Cart | null;
 }
 
 export type Cart = {
-  id?: number;
+  id: number;
   userId?: number;
   user?: User | null;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
   items?: ItemCart[];
 }
 
 export type ItemCart = {
-  id?: number;
-  cartId?: number;
-  productId?: number;
-  quantity?: number;
+  id: number;
+  cartId: number;
+  productId: number;
+  quantity: number;
   cart?: Cart;
   product?: Product;
 }

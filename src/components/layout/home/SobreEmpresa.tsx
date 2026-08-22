@@ -1,13 +1,10 @@
-import CardPilar from "@/src/components/ui/CardPilar";
-import { PILARES_EMPRESA, PilarEmpresa } from "@/src/data/sobre";
+import CardPilar, { IdentityItem } from "@/src/components/ui/CardPilar";
 
-interface PropsSobreEmpresa {
-  pilares?: PilarEmpresa[];
-}
+type SobreEmpresaProps = {
+  pilares: IdentityItem[];
+};
 
-export default function SobreEmpresa({
-  pilares = PILARES_EMPRESA,
-}: PropsSobreEmpresa) {
+export default function SobreEmpresa({ pilares }: SobreEmpresaProps) {
   return (
     <section className="flex flex-col gap-8 md:gap-12 w-full bg-white py-12 md:py-20 px-4 sm:px-8 border-b border-chocolate/20">
       <div className="flex flex-col gap-2 max-w-2xl mx-auto text-center">
@@ -20,8 +17,8 @@ export default function SobreEmpresa({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-7xl w-full mx-auto">
-        {pilares.map((pilar) => (
-          <CardPilar key={pilar.id} pilar={pilar} />
+        {pilares.map((item) => (
+          <CardPilar key={item.id} item={item} />
         ))}
       </div>
     </section>
