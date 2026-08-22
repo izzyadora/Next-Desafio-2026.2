@@ -130,14 +130,13 @@ export default function Login() {
                       Faça login
                     </button>
                   </p>
-                  <Link href="/tabela">
                     <button
                       className="bg-militar-500 text-creme py-3 w-full rounded-3xl hover:bg-militar-300 transition-colors"
+                      onClick={() => setMode("login")}
                       type="submit"
                     >
                       Cadastrar
                     </button>
-                  </Link>
                 </>
               )}
             </div>

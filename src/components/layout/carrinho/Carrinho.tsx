@@ -13,6 +13,7 @@ interface ItemCarrinho {
   quantidade: number;
 }
 
+// Mock dos itens, preciso retirar isso
 const CARRINHO_MOCK: ItemCarrinho[] = [
   {
     id: "p1",
@@ -34,6 +35,7 @@ const formataDinheiro = (valor: number) =>
   valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 export default function PaginaCarrinho() {
+  // atualizar e tirar o mock para adicionar do banco
   const [itens, setItems] = useState<ItemCarrinho[]>(CARRINHO_MOCK);
   const [cep, setCep] = useState("");
 
@@ -56,12 +58,16 @@ export default function PaginaCarrinho() {
     [itens],
   );
 
+  // o update do frete gerado pela api precisa estar nessa variável
   const frete = 0;
   const total = subtotal + frete;
 
+  // Return da página
   return (
     <section className="bg-offwhite min-h-screen py-12 px-4 sm:px-6 lg:px-8 font-dm-sans text-chocolate">
       <div className="max-w-5xl mx-auto space-y-10">
+
+        {/* Cabeçalho */}
         <header className="text-center space-y-2">
           <h1 className="text-3xl md:text-4xl font-source-serif font-bold">
             Carrinho
@@ -72,6 +78,7 @@ export default function PaginaCarrinho() {
           </p>
         </header>
 
+        {/* Página para caso o carrinho esteja vazio */}
         {itens.length === 0 ? (
           <CarrinhoVazio />
         ) : (
@@ -86,6 +93,7 @@ export default function PaginaCarrinho() {
               </Link>
             </div>
 
+            {/* Tabela do carrinho */}
             <div className="rounded-2xl overflow-hidden border border-militar-100/30 bg-white">
               <div className="hidden md:grid grid-cols-[2fr_1fr_1.4fr_1fr_auto] items-center gap-4 bg-chocolate text-creme px-6 py-4 text-sm font-semibold">
                 <span>Produto</span>
@@ -106,7 +114,8 @@ export default function PaginaCarrinho() {
                 ))}
               </ul>
             </div>
-
+            
+            {/* Frete ( falta conectar com a API) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-creme rounded-2xl p-6 sm:p-8 space-y-4">
                 <h2 className="font-source-serif text-xl sm:text-2xl font-bold">
@@ -128,7 +137,8 @@ export default function PaginaCarrinho() {
                   />
                 </div>
               </div>
-
+              
+              {/* Cálculo final */}
               <div className="bg-creme rounded-2xl p-6 sm:p-8 space-y-4">
                 <h2 className="font-source-serif text-xl sm:text-2xl font-bold">
                   Resumo do Pedido
@@ -143,6 +153,8 @@ export default function PaginaCarrinho() {
                     <span>{formataDinheiro(total)}</span>
                   </div>
                 </div>
+
+                {/* Botão de checkout */}
                 <button
                   type="button"
                   className="w-full bg-chocolate hover:bg-oliva text-creme font-medium py-3.5 rounded-xl transition-colors cursor-pointer"

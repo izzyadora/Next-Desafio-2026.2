@@ -47,7 +47,7 @@ export default function Sidebar() {
             email@gmail.com
           </span>
 
-          <Link href="/login">
+          <Link href="/home">
             <button className="flex items-center gap-2 bg-offwhite text-chocolate rounded-4xl px-4 py-2 mt-4 hover:bg-creme hover:cursor-pointer transition-colors">
               <SquareArrowRightExit className="h-5 w-5" />
               <span className="hidden sm:inline">Sair</span>
