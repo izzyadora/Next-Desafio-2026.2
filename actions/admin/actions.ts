@@ -7,14 +7,14 @@ export async function CreateProduto(data: {
     title: string;
     description: string;
     price: number;
-    principalImage: string;
+    image: string;
 }) {
     const produto = await prisma.product.create({
         data: {
             title: data.title,
             description: data.description,
             price: data.price,
-            image: data.principalImage,
+            image: data.image,
         },
     });
     revalidatePath('/tabela');

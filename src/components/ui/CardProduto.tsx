@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ShoppingCart, ListPlus } from "lucide-react";
 import { ProductCard } from "@/types/data";
+import { addToCart } from "@/actions/carrinho/actions";
 
 type CardProps = {
     produto: ProductCard;
@@ -17,7 +18,8 @@ export default function CardProduto({ produto }: CardProps) {
     router.push(`/visualizacao/${produto.id}`);
   };
 
-  const handleAdicionarECarrinho = () => {
+  const handleAdicionarECarrinho = async () => {
+    await addToCart(produto.id);
     router.push("/carrinho");
   };
 
