@@ -3,10 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Minus, Plus, ShoppingCart, PackageX } from "lucide-react";
+import { ArrowLeft, Minus, Plus, ShoppingCart } from "lucide-react";
 import { ProductIndividual } from "@/types/data";
 
-export default function PaginaVisualizacao({product}: {product: ProductIndividual}) {
+export default function PaginaVisualizacao({
+  product,
+}: {
+  product: ProductIndividual;
+}) {
   const produto = product;
   const [quantidade, setQuantidade] = useState(1);
 
@@ -15,29 +19,6 @@ export default function PaginaVisualizacao({product}: {product: ProductIndividua
 
   const formatarPreco = (valor: number) =>
     valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-
-  if (!produto) {
-    return (
-      <main className="min-h-screen bg-creme flex items-center justify-center px-6">
-        <div className="flex flex-col items-center gap-4 text-center animate-fade-in">
-          <PackageX className="w-12 h-12 text-militar-300" strokeWidth={1.5} />
-          <h1 className="font-source-serif font-bold text-2xl text-chocolate">
-            Produto não encontrado
-          </h1>
-          <p className="font-dm-sans text-militar-300">
-            O produto que você procura não existe ou foi removido.
-          </p>
-          <Link
-            href="/produtos"
-            className="mt-2 inline-flex items-center gap-2 font-dm-sans text-sm text-militar-500 hover:text-oliva transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Voltar para o cardápio
-          </Link>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main className="min-h-screen bg-offwhite">
@@ -112,17 +93,18 @@ export default function PaginaVisualizacao({product}: {product: ProductIndividua
             <div className="border-t border-militar-100/40 mt-8 mb-6" />
 
             {/* Adicionar ao carrinho (Linkar depois com o carrinho) */}
-            <button
-              type="button"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-militar-500 hover:bg-oliva text-creme font-dm-sans font-medium px-8 py-3.5 rounded-xl transition-colors cursor-pointer"
-            >
-              <ShoppingCart className="w-5 h-5" strokeWidth={2} />
-              Adicionar ao carrinho
-            </button>
+            <Link href="/carrinho" className="block w-full">
+              <button
+                type="button"
+                className="w-full inline-flex items-center justify-center gap-3 bg-militar-500 hover:bg-oliva text-creme font-dm-sans font-medium px-8 py-3.5 rounded-xl transition-colors cursor-pointer"
+              >
+                <ShoppingCart className="w-5 h-5" strokeWidth={2} />
+                Adicionar ao carrinho
+              </button>
+            </Link>
           </div>
         </div>
       </div>
     </main>
   );
 }
-
