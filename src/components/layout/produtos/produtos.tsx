@@ -1,8 +1,8 @@
 import CarrosselProdutos from "@/src/components/layout/produtos/CarrosselProdutos";
-import { PRODUTOS } from "@/src/data/produtos"; 
+import { getProdutos } from "@/actions/produtos/actions";
 
-export default function Produtos() {
-  const totalProdutos = PRODUTOS.length;
+export default async function Produtos() {
+  const {products, totalCount} = await getProdutos();
 
   return (
     <section className="bg-offwhite min-h-screen py-12 px-4 sm:px-8">
@@ -18,11 +18,11 @@ export default function Produtos() {
 
         <div>
           <p className="font-source-serif font-bold text-xl sm:text-2xl text-chocolate">
-            {totalProdutos} produtos encontrados
+            {totalCount} produtos encontrados
           </p>
         </div>
 
-        <CarrosselProdutos produtos={PRODUTOS} />
+        <CarrosselProdutos produtos={products} />
       </div>
     </section>
   );

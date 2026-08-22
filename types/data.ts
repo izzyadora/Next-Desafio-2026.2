@@ -55,3 +55,5 @@ export type ItemCart = {
   cart?: Cart;
   product?: Product;
 }
+
+export type ProductCard = Pick<Product, "id" | "image" | "title" | "price" | "description">;

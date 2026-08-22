@@ -44,5 +44,5 @@ export async function getProdutos(query?: string, page: number = 1, limit: numbe
 
     const totalPages = Math.ceil(totalCount / limit);
 
-    return { products, totalPages, currentPage: page };
+    return { products, totalCount, totalPages, currentPage: page };
 }

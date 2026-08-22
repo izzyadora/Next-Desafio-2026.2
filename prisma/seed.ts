@@ -46,7 +46,7 @@ async function main() {
       title: "Panqueca Americana Clássica",
       description: "Acompanha manteiga cremosa e bastante xarope de bordo.",
       price: 19.9,
-      image: "images/panqueca_normal.jpg",
+      image: "/images/panqueca_normal.jpg",
     },
     {
       title: "Panqueca de Blueberry Dupla",

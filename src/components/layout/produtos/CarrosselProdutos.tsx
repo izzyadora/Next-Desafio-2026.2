@@ -4,20 +4,18 @@ import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
-import CardProduto, { Produto } from "@/src/components/ui/CardProduto";
-import { PRODUTOS } from "@/src/data/produtos";
+import CardProduto from "@/src/components/ui/CardProduto";
+import { ProductCard } from "@/types/data";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 interface CarrosselProdutosProps {
-  produtos?: Produto[];
+  produtos: ProductCard[];
 }
 
-export default function CarrosselProdutos({
-  produtos = PRODUTOS,
-}: CarrosselProdutosProps) {
+export default function CarrosselProdutos({ produtos }: CarrosselProdutosProps) {
   const itensPorPagina = 16;
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -58,8 +56,8 @@ export default function CarrosselProdutos({
         }}
         className="w-full pb-6"
       >
-        {paginasDeProdutos.map((pagina, index) => (
-          <SwiperSlide key={index}>
+        {paginasDeProdutos.map((pagina, id) => (
+          <SwiperSlide key={id}>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {pagina.map((produto) => (
                 <div key={produto.id} className="h-full">

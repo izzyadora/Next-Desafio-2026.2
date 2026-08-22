@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ShoppingCart, ListPlus } from "lucide-react";
-import { Product } from "@/types/data";
+import { ProductCard } from "@/types/data";
 
 type CardProps = {
-    produto: Product;
+    produto: ProductCard;
 }
 export default function CardProduto({ produto }: CardProps) {
   // Redirecionador de rotas
@@ -52,10 +52,7 @@ export default function CardProduto({ produto }: CardProps) {
 
           <div className="flex items-center justify-between pt-2">
             <span className="font-dm-sans text-[1.2rem] font-bold text-chocolate">
-              {produto.price.toLocaleString("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              })}
+              {produto.price}
             </span>
 
             <div className="flex gap-2">
