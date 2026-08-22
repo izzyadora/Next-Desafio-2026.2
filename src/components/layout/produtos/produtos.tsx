@@ -1,4 +1,4 @@
-import CarrosselProdutos from "@/src/components/layout/produtos/CarrosselProdutos";
+import GridTodosProdutos from "@/src/components/layout/produtos/GridTodosProdutos";
 import { getProdutos } from "@/actions/produtos/actions";
 
 export default async function Produtos() {
@@ -22,7 +22,9 @@ export default async function Produtos() {
           </p>
         </div>
 
-        <CarrosselProdutos produtos={products} />
+        <div>
+          <GridTodosProdutos products={products}/>
+        </div>
       </div>
     </section>
   );

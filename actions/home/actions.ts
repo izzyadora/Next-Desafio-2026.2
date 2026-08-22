@@ -2,8 +2,8 @@
 
 import prisma from "@/src/lib/db";
 
-export default async function getMaisVendidos() {
-    const posts = await prisma.product.findMany({
+export async function getMaisVendidos() {
+    const products = await prisma.product.findMany({
         select:{
             id: true,
             title: true,
@@ -13,5 +13,19 @@ export default async function getMaisVendidos() {
         },
         take: 6,
     });
-    return posts;
+    return products;
+}
+
+export async function getTodosProdutos() {
+  const products = await prisma.product.findMany({
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      image: true,
+      price: true,
+    },
+  });
+
+  return products;
 }

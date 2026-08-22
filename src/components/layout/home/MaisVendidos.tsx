@@ -1,5 +1,10 @@
+import CarrosselMaisVendidos from "@/src/components/layout/home/carrossel/CarrosselMaisVendidos"
+import { getMaisVendidos } from "@/actions/home/actions";
 
-export default function MaisVendidos() {
+
+export default async function MaisVendidos() {
+  const produtos = await getMaisVendidos();
+
   return (
     <section className="flex flex-col gap-4 w-full p-6 bg-white border-b border-chocolate/20">
       {/* Cabeçalho */}
@@ -10,6 +15,10 @@ export default function MaisVendidos() {
         <h2 className="font-source-serif text-2xl sm:text-4xl md:text-[2.4rem] font-bold text-chocolate leading-tight">
           Mais vendidos:
         </h2>
+      </div>
+
+      <div>
+        <CarrosselMaisVendidos products={produtos}/>
       </div>
     </section>
   );

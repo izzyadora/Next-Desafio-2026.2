@@ -46,7 +46,7 @@ export default function CardOpiniao({ opiniao }: PropsCardOpiniao) {
                 key={index}
                 className={`h-3.5 w-3.5 ${
                   index < opiniao.avaliacao
-                    ? "fill-militar-300 text-amber-400"
+                    ? "fill-militar-300 text-militar-300"
                     : "fill-gray-300 text-gray-300"
                 }`}
               />

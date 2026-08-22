@@ -17,8 +17,8 @@ export default async function Home() {
     return (
     <main>
       <Hero />
-      <SobreEmpresa pilares={data}/>
       <MaisVendidos />
+      <SobreEmpresa pilares={data}/>
       <Opinioes />
     </main>
   );
