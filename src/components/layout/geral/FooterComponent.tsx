@@ -59,13 +59,13 @@ export default function Footer() {
             })}
           </div>
           <div className="flex flex-row gap-4 text-[0.6rem] sm:text-base">
-            <a href="#" className="text-creme hover:text-white">
+            <Link href="/termos" className="text-creme hover:text-white">
               Termos de uso
-            </a>
+            </Link>
             <span>•</span>
-            <a href="#" className="text-creme hover:text-white">
+            <Link href="/politicas" className="text-creme hover:text-white">
               Política de privacidade
-            </a>
+            </Link>
           </div>
 
           <p className="text-[0.5rem] sm:text-xs text-creme/70 text-center font-light tracking-wide">
