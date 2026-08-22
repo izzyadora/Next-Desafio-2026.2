@@ -52,7 +52,11 @@ export default function CardProduto({ produto }: CardProps) {
 
           <div className="flex items-center justify-between pt-2">
             <span className="font-dm-sans text-[1.2rem] font-bold text-chocolate">
-              {produto.price}
+              {produto.price.toLocaleString('pt-BR', {
+                  style: "currency",
+                  currency: "BRL",
+              }
+              )}
             </span>
 
             <div className="flex gap-2">
