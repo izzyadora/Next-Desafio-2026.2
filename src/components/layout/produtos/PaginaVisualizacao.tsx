@@ -1,24 +1,43 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Minus, Plus, ShoppingCart } from "lucide-react";
 import { ProductIndividual } from "@/types/data";
+import { addToCart } from "@/actions/carrinho/actions";
+
 
 export default function PaginaVisualizacao({
   product,
 }: {
-  product: ProductIndividual;
+  product: ProductIndividual | null;
 }) {
-  const produto = product;
   const [quantidade, setQuantidade] = useState(1);
+  const router = useRouter();
+
+  // guard clause: se não tiver produto, nem renderiza o resto
+  if (!product) {
+    return (
+      <main className="min-h-screen bg-offwhite flex items-center justify-center">
+        <p className="font-dm-sans text-militar-300">Produto não encontrado.</p>
+      </main>
+    );
+  }
+
+  const produto = product;
 
   const aumentarQuantidade = () => setQuantidade((q) => Math.min(q + 1, 99));
   const diminuirQuantidade = () => setQuantidade((q) => Math.max(q - 1, 1));
 
   const formatarPreco = (valor: number) =>
     valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+  const handleAdicionarECarrinho = async () => {
+    await addToCart(produto.id, quantidade);
+    router.push("/carrinho");
+  };
 
   return (
     <main className="min-h-screen bg-offwhite">
@@ -93,15 +112,14 @@ export default function PaginaVisualizacao({
             <div className="border-t border-militar-100/40 mt-8 mb-6" />
 
             {/* Adicionar ao carrinho (Linkar depois com o carrinho) */}
-            <Link href="/carrinho" className="block w-full">
-              <button
-                type="button"
-                className="w-full inline-flex items-center justify-center gap-3 bg-militar-500 hover:bg-oliva text-creme font-dm-sans font-medium px-8 py-3.5 rounded-xl transition-colors cursor-pointer"
-              >
-                <ShoppingCart className="w-5 h-5" strokeWidth={2} />
-                Adicionar ao carrinho
-              </button>
-            </Link>
+            <button
+              type="button"
+              onClick={handleAdicionarECarrinho}
+              className="w-full inline-flex items-center justify-center gap-3 bg-militar-500 hover:bg-oliva text-creme font-dm-sans font-medium px-8 py-3.5 rounded-xl transition-colors cursor-pointer"
+            >
+              <ShoppingCart className="w-5 h-5" strokeWidth={2} />
+              Adicionar ao carrinho
+            </button>
           </div>
         </div>
       </div>
