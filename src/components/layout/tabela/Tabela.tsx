@@ -1,47 +1,28 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Eye, Pencil, Trash2, Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { getProdutos } from "@/actions/produtos/actions";
 
-interface Produto {
+import ModalEditar from "./modais/ModalEditar";
+import ModalExcluir from "./modais/ModalExcluir";
+import ModalVisualizar from "./modais/ModalVisualizar";
+import ModalCriar from "./modais/ModalCriar";
+
+
+type Produto = {
   id: number;
-  imagem: string;
-  nome: string;
-  preco: number;
-  descricao: string;
+  image: string;
+  title: string;
+  price: number;
+  description: string;
 }
 
-const PRODUTOS_MOCK: Produto[] = [
-  {
-    id: 1,
-    imagem: "/pancake.png",
-    nome: "Panqueca de Blueberry",
-    preco: 24.99,
-    descricao: "Leve, macia, cheia de sabor.",
-  },
-  {
-    id: 2,
-    imagem: "/pancake.png",
-    nome: "Panqueca de Blueberry",
-    preco: 24.99,
-    descricao: "Leve, macia, cheia de sabor.",
-  },
-  {
-    id: 3,
-    imagem: "/pancake.png",
-    nome: "Panqueca de Blueberry",
-    preco: 24.99,
-    descricao: "Leve, macia, cheia de sabor.",
-  },
-  {
-    id: 4,
-    imagem: "/pancake.png",
-    nome: "Panqueca de Blueberry",
-    preco: 24.99,
-    descricao: "Leve, macia, cheia de sabor.",
-  },
-];
+type TabelaProps = {
+  produtos: Produto[];
+};
+
 
 const ITENS_POR_PAGINA = 4;
 const TOTAL_PAGINAS = 4;
@@ -131,9 +112,10 @@ function AcoesProduto({ nome }: { nome: string }) {
   );
 }
 
-export default function Tabela() {
+export default function Tabela({produtos}: TabelaProps) {
   const [paginaAtual, setPaginaAtual] = useState(1);
-  const produtos = useMemo(() => PRODUTOS_MOCK, []);
+
+
 
   return (
     <div className="min-h-screen bg-militar-300 px-4 py-16 sm:px-6 lg:px-10 z-0">
