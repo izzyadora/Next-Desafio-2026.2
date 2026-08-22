@@ -1,5 +1,6 @@
 import GridTodosProdutos from "@/src/components/layout/produtos/GridTodosProdutos";
 import { getProdutos } from "@/actions/produtos/actions";
+import MiniBuscaProdutos from "./busca/MiniBuscaProdutos";
 
 export default async function Produtos() {
   const {products, totalCount} = await getProdutos();
@@ -16,10 +17,11 @@ export default async function Produtos() {
           </p>
         </div>
 
-        <div>
-          <p className="font-source-serif font-bold text-xl sm:text-2xl text-chocolate">
+        <div className="flex flex-col items-center sm:flex-row sm:justify-between lg:px-12">
+          <p className="font-source-serif font-bold text-2xl lg:text-3xl text-chocolate">
             {totalCount} produtos encontrados
           </p>
+          <MiniBuscaProdutos/>
         </div>
 
         <div>
