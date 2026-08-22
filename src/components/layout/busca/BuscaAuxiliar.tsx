@@ -8,7 +8,7 @@ export default function BuscaAuxiliar({ count }: AuxiliarProps) {
   return (
     <form className="flex w-full lg:w-10/12" id="auxSearch" autoComplete="off">
       <div className="flex flex-col w-full gap-2 my-10">
-        <div className="relative flex items-center w-full">
+        <div className="relative flex items-center w-full bg-white rounded-xl">
           <SearchIcon className="w-7 h-7 absolute text-militar-500 left-4" />
           <input
             id="aux-search-input"

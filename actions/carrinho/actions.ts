@@ -15,11 +15,12 @@ export async function addToCart(productID: number){
     if(!product){
         throw new Error("Produto não encontrado");
     }
+    revalidatePath("/carrinho");
 }
 
-export async function updateCartItem(
-    
-){}
+export async function updateCartItem(){
+
+}
 
 export async function removeFromCart(){
 
