@@ -1,4 +1,4 @@
-import Login from "@/src/components/layout/cadastro e login/Login";
+import Login from "@/src/components/layout/cadastro-e-login/Login";
 
 export const metadata = {
   title: 'Midori Café - Autentique-se',
