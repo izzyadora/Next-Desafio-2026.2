@@ -29,43 +29,68 @@ export default function ModalVisualizar({
   return (
     <EstruturaModal isOpen={isOpen} onClose={onClose}>
       {/* Corpo do modal */}
-      <div className="flex-column text-chocolate py-12 px-4 space-y-6">
-        <h1 className="font-dm-sans font-semibold text-xl">
+      <div className="flex flex-col font-dm-sans text-chocolate px-6 py-10 sm:px-10">
+        <h1 className="text-center font-source-serif text-2xl font-bold">
           Visualizar produto
         </h1>
 
-        <div>
-          <label className="">Imagem</label>
+        <div className="mt-6 flex flex-col items-center gap">
+          <label className="text-xs font-semibold uppercase tracking-wide text-chocolate/60">
+            Imagem
+          </label>
           <Image
             src={produto.image}
             alt={produto.title}
-            width={120}
-            height={120}
+            width={180}
+            height={180}
+            className="border-chocolate/50 border-4 rounded-[100%] object-cover"
           />
         </div>
 
-        <label className="">Nome do produto</label>
-        <input type="text" value={produto.title} disabled className=""></input>
+        <div className="mt-8 space-y-4">
+          <div className="flex flex-col gap-1">
+            <label className="text-xs font-semibold uppercase tracking-wide text-chocolate/60">
+              Nome do produto
+            </label>
+            <input
+              type="text"
+              value={produto.title}
+              disabled
+              className="w-full rounded-xl border border-chocolate/15 bg-white/60 px-4 py-3 text-sm leading-relaxed text-chocolate"
+            ></input>
+          </div>
 
-        <label className="">Preço</label>
-        <input
-          type="text"
-          value={formataDinheiro(produto.price)}
-          disabled
-          className=""
-        ></input>
+          <div className="flex flex-col gap-1">
+            <label className="text-xs font-semibold uppercase tracking-wide text-chocolate/60">
+              Descrição
+            </label>
+            <textarea
+              value={produto.description}
+              disabled
+              rows={3}
+              className="w-full resize-none rounded-xl border border-chocolate/15 bg-white/60 px-4 py-3 text-sm leading-relaxed text-chocolate"
+            />
+          </div>
+        </div>
 
-        <label className="">Descrição</label>
-        <input
-          type="text"
-          value={produto.description}
-          disabled
-          className=""
-        ></input>
+        <div className="flex flex-col gap-1">
+          <label className="text-xs font-semibold uppercase tracking-wide text-chocolate/60">
+            Preço
+          </label>
+          <input
+            type="text"
+            value={formataDinheiro(produto.price)}
+            disabled
+            className="w-full rounded-xl border border-chocolate/15 bg-white/60 px-4 py-3 text-sm leading-relaxed text-chocolate"
+          ></input>
+        </div>
 
         {/* Botões */}
-        <div className="flex max-w-10/12 align-center justify-center gap-6 font-dm-sans font-semibold">
-          <button className="bg-chocolate text-offwhite w-full py-2 px-4 rounded-4xl hover:cursor-pointer">
+        <div className="flex justify-center gap-6 font-dm-sans font-semibold pt-4">
+          <button
+            className="bg-chocolate text-offwhite w-10/12 py-2 px-4 rounded-4xl hover:cursor-pointer"
+            onClick={onClose}
+          >
             Voltar
           </button>
         </div>

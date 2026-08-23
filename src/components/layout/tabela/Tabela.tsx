@@ -27,7 +27,7 @@ type Produto = {
 
 type TabelaProps = {
   produtos: Produto[];
-  // total: number;
+  total: number;
   // totalPages: number;
   // currentPage: number;
   // search: string;
@@ -37,65 +37,16 @@ function formatarPreco(valor: number) {
   return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
-function Paginacao({
-  paginaAtual,
-  totalPaginas,
-  onChange,
-}: {
-  paginaAtual: number;
-  totalPaginas: number;
-  onChange: (pagina: number) => void;
-}) {
-  return (
-    <nav
-      aria-label="Paginação de produtos"
-      className="mt-6 flex items-center justify-center gap-1 sm:gap-2"
-    >
-      <button
-        type="button"
-        onClick={() => onChange(Math.max(1, paginaAtual - 1))}
-        disabled={paginaAtual === 1}
-        aria-label="Página anterior"
-        className="grid h-8 w-8 place-items-center rounded-full text-chocolate transition hover:bg-chocolate/10 disabled:opacity-30 disabled:hover:bg-transparent"
-      >
-        <ChevronLeft className="h-4 w-4" />
-      </button>
-
-      {Array.from({ length: totalPaginas }, (_, i) => i + 1).map((pagina) => (
-        <button
-          key={pagina}
-          type="button"
-          onClick={() => onChange(pagina)}
-          aria-current={pagina === paginaAtual ? "page" : undefined}
-          className={`grid h-8 w-8 place-items-center rounded-full text-sm font-medium transition ${
-            pagina === paginaAtual
-              ? "bg-chocolate text-offwhite"
-              : "text-chocolate hover:bg-chocolate/10"
-          }`}
-        >
-          {pagina}
-        </button>
-      ))}
-
-      <button
-        type="button"
-        onClick={() => onChange(Math.min(totalPaginas, paginaAtual + 1))}
-        disabled={paginaAtual === totalPaginas}
-        aria-label="Próxima página"
-        className="grid h-8 w-8 place-items-center rounded-full text-chocolate transition hover:bg-chocolate/10 disabled:opacity-30 disabled:hover:bg-transparent"
-      >
-        <ChevronRight className="h-4 w-4" />
-      </button>
-    </nav>
-  );
-}
-
 function AcoesProduto({
   produto,
   onVisualizar,
+  onEditar,
+  onExcluir,
 }: {
   produto: Produto;
   onVisualizar: (produto: Produto) => void;
+  onEditar: (produto: Produto) => void;
+  onExcluir: (produto: Produto) => void;
 }) {
   return (
     <div className="flex items-center justify-end gap-3 sm:justify-center">
@@ -103,6 +54,7 @@ function AcoesProduto({
         type="button"
         aria-label={`Visualizar ${produto.title}`}
         className="text-chocolate/70 transition hover:text-chocolate"
+        onClick={() => onVisualizar(produto)}
       >
         <Eye className="h-4 w-4" />
       </button>
@@ -110,6 +62,7 @@ function AcoesProduto({
         type="button"
         aria-label={`Editar ${produto.title}`}
         className="text-chocolate/70 transition hover:text-chocolate"
+        onClick={() => onEditar(produto)}
       >
         <Pencil className="h-4 w-4" />
       </button>
@@ -117,6 +70,7 @@ function AcoesProduto({
         type="button"
         aria-label={`Excluir ${produto.title}`}
         className="text-red-900 transition hover:text-red-950"
+        onClick={() => onExcluir(produto)}
       >
         <Trash2 className="h-4 w-4" />
       </button>
@@ -125,16 +79,27 @@ function AcoesProduto({
 }
 
 // export default function Tabela({produtos, total, totalPages, currentPage, search}: TabelaProps) {
-export default function Tabela({ produtos }: TabelaProps) {
+export default function Tabela({ produtos, total }: TabelaProps) {
   //const [paginaAtual, setPaginaAtual] = useState(1);
   const [isModalCriarOpen, setIsModalCriarOpen] = useState(false);
   const [isModalEditarOpen, setIsModalEditarOpen] = useState(false);
   const [isModalVisualizarOpen, setIsModalVisualizarOpen] = useState(false);
+  const [isModalExcluirOpen, setIsModalExcluirOpen] = useState(false);
   const [selectedProduto, setSelectedProduto] = useState<Produto | null>(null);
 
   const handleVisualizar = (produto: Produto) => {
     setSelectedProduto(produto);
     setIsModalVisualizarOpen(true);
+  };
+
+  const handleEditar = (produto: Produto) => {
+    setSelectedProduto(produto);
+    setIsModalEditarOpen(true);
+  };
+
+  const handleExcluir = (produto: Produto) => {
+    setSelectedProduto(produto);
+    setIsModalExcluirOpen(true);
   };
 
   return (
@@ -146,13 +111,13 @@ export default function Tabela({ produtos }: TabelaProps) {
             Produtos
           </h1>
           <p className="mt-1 text-sm text-chocolate/70">
-            {/* adicionar count produtos */}
+            {total} produtos encontrados.
           </p>
         </header>
 
-        {/* Painel principal */}
+        {/* tabela */}
         <div className="overflow-hidden rounded-2xl bg-offwhite shadow-lg font-dm-sans">
-          {/* Barra de ação */}
+          {/* barra do topo + criar */}
           <div className="bg-chocolate px-4 py-4 sm:px-6">
             <button
               type="button"
@@ -167,7 +132,7 @@ export default function Tabela({ produtos }: TabelaProps) {
           {/* DESKTOP */}
           <table className="hidden w-full lg:table">
             <thead>
-              <tr className="bg-chocolate text-left text-xs font-semibold uppercase tracking-wide text-[#F5EFE6]/90">
+              <tr className="bg-chocolate text-center text-xs font-semibold uppercase tracking-wide text-[#F5EFE6]/90">
                 <th className="px-6 py-4 text-center font-semibold">ID</th>
                 <th className="px-6 py-4 text-center font-semibold">Imagem</th>
                 <th className="px-6 py-4 font-semibold">Nome</th>
@@ -183,7 +148,7 @@ export default function Tabela({ produtos }: TabelaProps) {
                     {produto.id}
                   </td>
                   <td className="px-6 py-4">
-                    <div className="mx-auto grid h-12 w-12 place-items-center overflow-hidden rounded-md bg-white">
+                    <div className="mx-auto grid h-12 w-12 place-items-center overflow-hidden rounded-md bg-white border-[0.75px] border-chocolate/40">
                       <Image
                         src={produto.image}
                         alt={produto.title}
@@ -203,7 +168,12 @@ export default function Tabela({ produtos }: TabelaProps) {
                     {produto.description}
                   </td>
                   <td className="px-6 py-4">
-                    <AcoesProduto produto={produto} onVisualizar={handleVisualizar} />
+                    <AcoesProduto
+                      produto={produto}
+                      onVisualizar={handleVisualizar}
+                      onEditar={handleEditar}
+                      onExcluir={handleExcluir}
+                    />
                   </td>
                 </tr>
               ))}
@@ -243,7 +213,12 @@ export default function Tabela({ produtos }: TabelaProps) {
                   {produto.description}
                 </p>
                 <div className="mt-1 border-t border-chocolate/10 pt-3">
-                  <AcoesProduto produto={produto} onVisualizar={handleVisualizar} />
+                  <AcoesProduto
+                    produto={produto}
+                    onVisualizar={handleVisualizar}
+                    onEditar={handleEditar}
+                    onExcluir={handleExcluir}
+                  />
                 </div>
               </div>
             ))}
@@ -276,20 +251,18 @@ export default function Tabela({ produtos }: TabelaProps) {
                     {produto.description}
                   </p>
                 </div>
-                <AcoesProduto produto={produto} onVisualizar={handleVisualizar} />
+                <AcoesProduto
+                  produto={produto}
+                  onVisualizar={handleVisualizar}
+                  onEditar={handleEditar}
+                  onExcluir={handleExcluir}
+                />
               </div>
             ))}
           </div>
         </div>
 
-        {/* <Paginacao
-          paginaAtual={paginaAtual}
-          totalPaginas={TOTAL_PAGINAS}
-          onChange={setPaginaAtual}
-        /> */}
-
-        {/* Modais de CRUD*/}
-        <ModalCriar />
+        {/* chamada dos modais de CRUD*/}
         <ModalVisualizar
           isOpen={isModalVisualizarOpen}
           onClose={() => {
@@ -298,8 +271,31 @@ export default function Tabela({ produtos }: TabelaProps) {
           }}
           produto={selectedProduto}
         />
-        <ModalEditar />
-        <ModalExcluir />
+
+        <ModalCriar
+          isOpen={isModalCriarOpen}
+          onClose={() => setIsModalCriarOpen(false)}
+        />
+
+        <ModalEditar
+          key={selectedProduto?.id ?? "editar-vazio"}
+          isOpen={isModalEditarOpen}
+          onClose={() => {
+            setIsModalEditarOpen(false);
+            setSelectedProduto(null);
+          }}
+          produto={selectedProduto}
+        />
+
+        <ModalExcluir
+          isOpen={isModalExcluirOpen}
+          onClose={() => {
+            setIsModalExcluirOpen(false);
+            setSelectedProduto(null);
+          }}
+          produto={selectedProduto}
+          onConfirmar={() => {}}
+        />
       </div>
     </div>
   );

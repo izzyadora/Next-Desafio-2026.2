@@ -2,6 +2,7 @@
 
 import { Trash2 } from "lucide-react";
 import EstruturaModal from "@/src/components/layout/tabela/modais/EstruturaModal";
+import { DeleteProduto } from "@/actions/admin/actions";
 
 type Produto = {
   id: number;
@@ -12,7 +13,7 @@ interface ModalExcluirProps {
   isOpen: boolean;
   onClose: () => void;
   produto: Produto | null;
-  onConfirmar: (id: number) => void; 
+  onConfirmar: (id: number) => void;
 }
 
 export default function ModalExcluir({
@@ -22,6 +23,12 @@ export default function ModalExcluir({
   onConfirmar,
 }: ModalExcluirProps) {
   if (!isOpen || !produto) return null;
+
+  const handleDeletar = async () => {
+    await DeleteProduto(produto.id);
+    onConfirmar(produto.id);
+    onClose();
+  };
 
   return (
     <EstruturaModal isOpen={isOpen} onClose={onClose}>
@@ -47,7 +54,7 @@ export default function ModalExcluir({
           </button>
           <button
             type="button"
-            onClick={() => onConfirmar(produto.id)}
+            onClick={handleDeletar}
             className="bg-red-800 text-offwhite py-2 px-4 rounded-4xl hover:cursor-pointer"
           >
             Deletar

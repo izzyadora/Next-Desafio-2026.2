@@ -26,7 +26,7 @@ export default function EstruturaModal({
       />
 
       {/* conteúdo do modal */}
-      <div className="relative w-full max-w-md rounded-2xl bg-offwhite shadow-lg overflow-hidden">
+      <div className="relative w-full max-w-xl rounded-2xl bg-offwhite shadow-lg overflow-hidden">
         <div className="w-full bg-chocolate flex justify-end px-4 py-2 rounded-tr-2xl rounded-tl-2xl">
           <button
             type="button"
