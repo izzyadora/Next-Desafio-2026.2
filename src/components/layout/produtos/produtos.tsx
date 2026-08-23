@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import BuscaProdutos from "@/src/components/layout/produtos/busca/BuscaProdutos";
-import WrapperGridProdutos from "./WrapperGridProdutos";
-import ProdutosSkeleton from "./ProdutosSkeleton";
+import WrapperGridProdutos from "@/src/components/layout/produtos/WrapperGridProdutos";
+import ProdutosSkeleton from "@/src/components/layout/produtos/ProdutosSkeleton";
 
 type ProdutosProps = {
   query: string;

@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Eye, Pencil, Trash2, Plus } from "lucide-react";
 import Image from "next/image";
 
-import ModalEditar from "./modais/ModalEditar";
-import ModalExcluir from "./modais/ModalExcluir";
-import ModalVisualizar from "./modais/ModalVisualizar";
-import ModalCriar from "./modais/ModalCriar";
-import PaginacaoTabela from "../../ui/PaginacaoTabela";
-import BuscaTabela from "../../ui/BuscaTabela";
+import ModalEditar from "@/src/components/layout/tabela/modais/ModalEditar";
+import ModalExcluir from "@/src/components/layout/tabela/modais/ModalExcluir";
+import ModalVisualizar from "@/src/components/layout/tabela/modais/ModalVisualizar";
+import ModalCriar from "@/src/components/layout/tabela/modais/ModalCriar";
+import PaginacaoTabela from "@/src/components/ui/PaginacaoTabela";
+import BuscaTabela from "@/src/components/ui/BuscaTabela";
 
 type Produto = {
   id: number;
