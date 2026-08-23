@@ -2,7 +2,7 @@ import Hero from "@/src/components/layout/home/HeroSection";
 import SobreEmpresa from "@/src/components/layout/home/SobreEmpresa";
 import Opinioes from "@/src/components/layout/home/Opinioes";
 import MaisVendidos from "@/src/components/layout/home/MaisVendidos";
-import { getIdentities } from "@/src/lib/api/get-mvv";
+import { getIdentities } from "@/src/app/api/get-mvv";
 
 
 export const metadata = {

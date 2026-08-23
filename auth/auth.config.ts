@@ -7,16 +7,21 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
+      const isAdmin = auth?.user?.role === 'ADMIN';
+
       const isOnTabela = nextUrl.pathname.startsWith('/tabela');
       const isOnLogin = nextUrl.pathname.startsWith('/login');
 
       if (isOnTabela) {
-        if (isLoggedIn) return true;
+        if (isLoggedIn && isAdmin) return true;
+        if (isLoggedIn) {
+          return Response.redirect(new URL('/', nextUrl));
+        }
         return false; 
       }
-
       if (isOnLogin && isLoggedIn) {
-        return Response.redirect(new URL('/tabela', nextUrl));
+        const destination = isAdmin ? '/tabela' : '/';
+        return Response.redirect(new URL(destination, nextUrl));
       }
 
       return true;

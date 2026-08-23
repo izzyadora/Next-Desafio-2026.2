@@ -1,16 +1,15 @@
-import { NextResponse } from "next/server";
+"use server";
 
 const MELHOR_ENVIO_API_URL =
   process.env.MELHOR_ENVIO_API_URL ??
   "https://sandbox.melhorenvio.com.br/api/v2/me/shipment/calculate";
 
-export async function POST(request: Request) {
+export async function calcularFreteBack(cep: string) {
   try {
-    const { cep } = await request.json();
     const postalCode = typeof cep === "string" ? cep.replace(/\D/g, "") : "";
 
     if (postalCode.length !== 8) {
-      return NextResponse.json({ error: "CEP inválido" }, { status: 400 });
+      return { error: "CEP inválido. Digite 8 dígitos." };
     }
 
     const response = await fetch(MELHOR_ENVIO_API_URL, {
@@ -19,11 +18,11 @@ export async function POST(request: Request) {
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.MELHOR_ENVIO_TOKEN}`,
-        "User-Agent": "MidoriCafe (seuemail@dominio.com)",
+        "User-Agent": "MidoriCafe (contato@midoricafe.com.br)", // Coloque um e-mail válido cadastrado no sandbox
       },
       body: JSON.stringify({
         from: {
-          postal_code: "36036900", // CEP de origem
+          postal_code: "36036900", // CEP de origem (Juiz de Fora)
         },
         to: {
           postal_code: postalCode,
@@ -46,28 +45,19 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       console.error("Erro Melhor Envio:", data);
-      return NextResponse.json(
-        { error: "Erro ao cotar frete" },
-        { status: response.status },
-      );
+      return { error: data?.message || "Erro ao cotar frete junto à transportadora." };
     }
 
     if (!Array.isArray(data)) {
       console.error("Resposta inesperada da API:", data);
-      return NextResponse.json(
-        { error: "Resposta inesperada da API de frete" },
-        { status: 502 },
-      );
+      return { error: "Resposta inesperada da API de frete." };
     }
 
     const validShippingOptions = data.filter((option: any) => !option.error);
 
-    return NextResponse.json(validShippingOptions);
+    return { data: validShippingOptions };
   } catch (error) {
-    console.error("Erro interno na rota de frete:", error);
-    return NextResponse.json(
-      { error: "Ops, erro interno no servidor!" },
-      { status: 500 },
-    );
+    console.error("Erro interno na action de frete:", error);
+    return { error: "Ops, erro ao se comunicar com o serviço de frete." };
   }
 }

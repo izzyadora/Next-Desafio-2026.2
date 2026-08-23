@@ -3,8 +3,9 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
+import { ArrowLeft, Minus, Plus, Trash2, ShoppingBag, Loader2 } from "lucide-react";
 import { updateCartItem, removeFromCart } from "@/actions/carrinho/actions";
+import { calcularFreteBack } from "@/actions/frete/actions";
 
 type ItemCarrinho = {
   id: number;
@@ -12,23 +13,34 @@ type ItemCarrinho = {
   imagemUrl: string;
   preco: number;
   quantidade: number;
-}
+};
+
+type OpcaoFrete = {
+  id: number;
+  name: string;
+  price: string;
+  custom_price: string;
+  discount: string;
+  currency: string;
+  delivery_time: number;
+  error?: string;
+};
 
 const formataDinheiro = (valor: number) =>
   valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-
-
-//Começo da função
 
 export default function PaginaCarrinho({
   itensIniciais,
 }: {
   itensIniciais: ItemCarrinho[];
 }) {
-
-  //mock tirado e linkado ao banco
   const [itens, setItems] = useState<ItemCarrinho[]>(itensIniciais);
   const [cep, setCep] = useState("");
+  
+  const [opcoesFrete, setOpcoesFrete] = useState<OpcaoFrete[]>([]);
+  const [freteSelecionado, setFreteSelecionado] = useState<OpcaoFrete | null>(null);
+  const [carregandoFrete, setCarregandoFrete] = useState(false);
+  const [erroFrete, setErroFrete] = useState<string | null>(null);
 
   const mudaQtd = async (id: number, diferenca: number) => {
     const itemAtual = itens.find((index) => index.id === id);
@@ -37,61 +49,78 @@ export default function PaginaCarrinho({
     const novaQtd = Math.min(Math.max(itemAtual.quantidade + diferenca, 1), 99);
 
     setItems((anterior) =>
-      anterior.map((item) => item.id === id ? {...item, quantidade: novaQtd} : item,
-    ),
-  );
+      anterior.map((item) => (item.id === id ? { ...item, quantidade: novaQtd } : item))
+    );
 
     try {
       await updateCartItem(id, novaQtd);
     } catch {
       setItems((anterior) =>
-        anterior.map((item) => item.id === id ? {...item, quantidade: itemAtual.quantidade} : item,
-      ),
-    );
+        anterior.map((item) => (item.id === id ? { ...item, quantidade: itemAtual.quantidade } : item))
+      );
     }
-  }
+  };
 
-  //tira do carrinho
   const tiraDoCarrinho = async (id: number) => {
     const itemRemovido = itens.find((index) => index.id === id);
     setItems((anterior) => anterior.filter((item) => item.id !== id));
 
-    try{
+    try {
       await removeFromCart(id);
     } catch {
-      if (itemRemovido){
+      if (itemRemovido) {
         setItems((anterior) => [...anterior, itemRemovido]);
       }
     }
   };
 
-  //calcula subtotal
+  // função para chamar a API de frete
+  const calcularFrete = async () => {
+  const cepLimpo = cep.replace(/\D/g, "");
+  if (cepLimpo.length !== 8) {
+    setErroFrete("Digite um CEP válido com 8 dígitos.");
+    return;
+  }
+
+  setCarregandoFrete(true);
+  setErroFrete(null);
+  setOpcoesFrete([]);
+  setFreteSelecionado(null);
+
+
+  const resultado = await calcularFreteBack(cepLimpo);
+
+  if (resultado.error) {
+    setErroFrete(resultado.error);
+  } else if (resultado.data) {
+    setOpcoesFrete(resultado.data);
+    if (resultado.data.length > 0) {
+      setFreteSelecionado(resultado.data[0]); 
+    }
+  }
+
+  setCarregandoFrete(false);
+};
+
+
   const subtotal = useMemo(
     () => itens.reduce((soma, item) => soma + item.preco * item.quantidade, 0),
-    [itens],
+    [itens]
   );
 
-  // o update do frete gerado pela api precisa estar nessa variável
-  const frete = 0;
-  const total = subtotal + frete;
+  const valorFrete = freteSelecionado ? parseFloat(freteSelecionado.custom_price || freteSelecionado.price) : 0;
+  const total = subtotal + valorFrete;
 
-
-  // Return da página
   return (
     <section className="bg-offwhite min-h-screen py-12 px-4 sm:px-6 lg:px-8 font-dm-sans text-chocolate">
       <div className="max-w-5xl mx-auto space-y-10">
-        {/* Cabeçalho */}
         <header className="text-center space-y-2">
-          <h1 className="text-3xl md:text-4xl font-source-serif font-bold">
-            Carrinho
-          </h1>
+          <h1 className="text-3xl md:text-4xl font-source-serif font-bold">Carrinho</h1>
           <p className="text-sm md:text-base text-militar-500">
-            Confira os produtos que você adicionou ao seu carrinho e finalize
-            sua compra.
+            Confira os produtos que você adicionou ao seu carrinho e finalize sua compra.
           </p>
         </header>
 
-        {/* página para caso o carrinho esteja vazio */}
         {itens.length === 0 ? (
           <CarrinhoVazio />
         ) : (
@@ -106,7 +135,7 @@ export default function PaginaCarrinho({
               </Link>
             </div>
 
-            {/* tabela do carrinho */}
+            {/* tabela de Produtos */}
             <div className="rounded-2xl overflow-hidden border border-militar-100/30 bg-white">
               <div className="hidden md:grid grid-cols-[2fr_1fr_1.4fr_1fr_auto] items-center gap-4 bg-chocolate text-creme px-6 py-4 text-sm font-semibold">
                 <span>Produto</span>
@@ -128,38 +157,85 @@ export default function PaginaCarrinho({
               </ul>
             </div>
 
-            {/* frete ( falta conectar com a API) */}
+            {/* frete e Resumo */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* cálculo do Frete */}
               <div className="bg-creme rounded-2xl p-6 sm:p-8 space-y-4">
-                <h2 className="font-source-serif text-xl sm:text-2xl font-bold">
-                  Calcular frete
-                </h2>
+                <h2 className="font-source-serif text-xl sm:text-2xl font-bold">Calcular frete</h2>
+                
                 <div className="space-y-2">
-                  <label htmlFor="cep" className="block text-sm">
-                    Digite o CEP
+                  <label htmlFor="cep" className="block text-sm font-medium">
+                    Digite seu CEP
                   </label>
-                  <input
-                    id="cep"
-                    type="text"
-                    inputMode="numeric"
-                    placeholder="00000-000"
-                    value={cep}
-                    onChange={(e) => setCep(e.target.value)}
-                    maxLength={9}
-                    className="w-full sm:w-64 rounded-full border border-chocolate/30 bg-white px-4 py-2.5 text-sm placeholder:text-militar-100 focus:outline-none focus:ring-2 focus:ring-militar-500"
-                  />
+                  <div className="flex gap-2">
+                    <input
+                      id="cep"
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="00000-000"
+                      value={cep}
+                      onChange={(e) => setCep(e.target.value)}
+                      maxLength={9}
+                      className="w-full rounded-full border border-chocolate/30 bg-white px-4 py-2.5 text-sm placeholder:text-militar-100 focus:outline-none focus:ring-2 focus:ring-militar-500"
+                    />
+                    <button
+                      type="button"
+                      onClick={calcularFrete}
+                      disabled={carregandoFrete}
+                      className="px-5 py-2.5 bg-militar-500 text-creme font-semibold rounded-full hover:bg-chocolate transition-colors disabled:opacity-50 flex items-center justify-center shrink-0 cursor-pointer"
+                    >
+                      {carregandoFrete ? <Loader2 className="w-4 h-4 animate-spin" /> : "Calcular"}
+                    </button>
+                  </div>
+                  {erroFrete && <p className="text-xs text-red-600 pt-1">{erroFrete}</p>}
                 </div>
+
+                {/* opções de frete retornadas */}
+                {opcoesFrete.length > 0 && (
+                  <div className="pt-4 border-t border-chocolate/10 space-y-2">
+                    <span className="text-xs font-semibold text-chocolate/80">Opções de entrega:</span>
+                    <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
+                      {opcoesFrete.map((opcao) => (
+                        <label
+                          key={opcao.id}
+                          className={`flex items-center justify-between p-3 rounded-xl border text-sm cursor-pointer transition-colors ${
+                            freteSelecionado?.id === opcao.id
+                              ? "border-militar-500 bg-white font-semibold"
+                              : "border-chocolate/10 bg-white/50 hover:bg-white"
+                          }`}
+                        >
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="radio"
+                              name="opcaoFrete"
+                              checked={freteSelecionado?.id === opcao.id}
+                              onChange={() => setFreteSelecionado(opcao)}
+                              className="accent-militar-500"
+                            />
+                            <span>{opcao.name}</span>
+                            <span className="text-xs text-militar-500">
+                              ({opcao.delivery_time} {opcao.delivery_time === 1 ? "dia útil" : "dias úteis"})
+                            </span>
+                          </div>
+                          <span>{formataDinheiro(parseFloat(opcao.custom_price || opcao.price))}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
-              {/* cálculo final */}
+              {/* resumo do pedido */}
               <div className="bg-creme rounded-2xl p-6 sm:p-8 space-y-4">
-                <h2 className="font-source-serif text-xl sm:text-2xl font-bold">
-                  Resumo do Pedido
-                </h2>
+                <h2 className="font-source-serif text-xl sm:text-2xl font-bold">Resumo do Pedido</h2>
                 <div className="space-y-2 text-sm sm:text-base">
                   <div className="flex justify-between">
+                    <span>Subtotal</span>
+                    <span>{formataDinheiro(subtotal)}</span>
+                  </div>
+                  <div className="flex justify-between">
                     <span>Frete</span>
-                    <span>{formataDinheiro(frete)}</span>
+                    <span>{freteSelecionado ? formataDinheiro(valorFrete) : "Calcule o frete"}</span>
                   </div>
                   <div className="flex justify-between font-bold text-lg pt-2 border-t border-chocolate/10">
                     <span>TOTAL</span>
@@ -195,13 +271,7 @@ function ItensCarrinho({
     <li className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1.4fr_1fr_auto] items-center gap-4 px-6 py-5">
       <div className="flex items-center gap-4 col-span-2 md:col-span-1">
         <div className="relative w-14 h-14 shrink-0 rounded-full overflow-hidden bg-offwhite border border-militar-100/30">
-          <Image
-            src={item.imagemUrl}
-            alt={item.nome}
-            fill
-            sizes="56px"
-            className="object-cover"
-          />
+          <Image src={item.imagemUrl} alt={item.nome} fill sizes="56px" className="object-cover" />
         </div>
         <span className="text-sm sm:text-base font-medium">{item.nome}</span>
       </div>
@@ -237,9 +307,7 @@ function ItensCarrinho({
       </div>
 
       <span className="text-sm sm:text-base font-bold md:text-right">
-        <span className="md:hidden text-militar-300 mr-1 font-normal">
-          Total:
-        </span>
+        <span className="md:hidden text-militar-300 mr-1 font-normal">Total:</span>
         {formataDinheiro(item.preco * item.quantidade)}
       </span>
 
@@ -257,7 +325,7 @@ function ItensCarrinho({
 
 function CarrinhoVazio() {
   return (
-    <div className="flex flex-col items-center justify-center gap-4 py-20 text-center animate-fade-in">
+    <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
       <ShoppingBag className="w-12 h-12 text-militar-300" strokeWidth={1.5} />
       <p className="text-militar-300">Seu carrinho está vazio.</p>
       <Link
