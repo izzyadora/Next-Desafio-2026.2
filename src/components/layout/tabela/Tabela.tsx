@@ -1,12 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Eye,
-  Pencil,
-  Trash2,
-  Plus,
-} from "lucide-react";
+import { Eye, Pencil, Trash2, Plus } from "lucide-react";
 import Image from "next/image";
 
 import ModalEditar from "./modais/ModalEditar";
@@ -14,7 +9,7 @@ import ModalExcluir from "./modais/ModalExcluir";
 import ModalVisualizar from "./modais/ModalVisualizar";
 import ModalCriar from "./modais/ModalCriar";
 import PaginacaoTabela from "../../ui/PaginacaoTabela";
-import BuscaTabela from "../../ui/BuscaTabela"
+import BuscaTabela from "../../ui/BuscaTabela";
 
 type Produto = {
   id: number;
@@ -27,9 +22,7 @@ type Produto = {
 type TabelaProps = {
   produtos: Produto[];
   total: number;
-  // totalPages: number;
-  // currentPage: number;
-  // search: string;
+  totalPages: number;
 };
 
 function formatarPreco(valor: number) {
@@ -77,9 +70,7 @@ function AcoesProduto({
   );
 }
 
-// export default function Tabela({produtos, total, totalPages, currentPage, search}: TabelaProps) {
-export default function Tabela({ produtos, total }: TabelaProps) {
-  //const [paginaAtual, setPaginaAtual] = useState(1);
+export default function Tabela({ produtos, total, totalPages }: TabelaProps) {
   const [isModalCriarOpen, setIsModalCriarOpen] = useState(false);
   const [isModalEditarOpen, setIsModalEditarOpen] = useState(false);
   const [isModalVisualizarOpen, setIsModalVisualizarOpen] = useState(false);
@@ -109,15 +100,15 @@ export default function Tabela({ produtos, total }: TabelaProps) {
           <h1 className="font-source-serif text-4xl font-bold tracking-tight text-chocolate sm:text-5xl">
             Produtos
           </h1>
-          <p className="mt-1 text-sm text-chocolate/70">
-            {total} produtos encontrados.
+          <p className="mt-1 text-sm text-chocolate/70 font-dm-sans">
+            <span className="font-semibold">{total}</span> produtos cadastrados.
           </p>
         </header>
 
         {/* tabela */}
-        <div className="overflow-hidden rounded-2xl bg-offwhite shadow-lg font-dm-sans">
+        <div className="overflow-hidden rounded-t-2xl bg-offwhite shadow-lg font-dm-sans">
           {/* barra do topo + criar */}
-          <div className="bg-chocolate px-4 py-4 sm:px-6">
+          <div className="bg-chocolate px-4 py-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
             <button
               type="button"
               className="inline-flex items-center gap-2 rounded-full bg-militar-500 px-4 py-2 text-sm font-medium text-offwhite transition hover:bg-militar-500 hover:cursor-pointer active:scale-[0.98]"
@@ -126,12 +117,14 @@ export default function Tabela({ produtos, total }: TabelaProps) {
               <Plus className="h-4 w-4" />
               Cadastrar novo produto
             </button>
+
+            <BuscaTabela />
           </div>
 
           {/* DESKTOP */}
-          <table className="hidden w-full lg:table">
+          <table className="w-full">
             <thead>
-              <tr className="bg-chocolate text-center text-xs font-semibold uppercase tracking-wide text-[#F5EFE6]/90">
+              <tr className="bg-chocolate text-center text-xs font-semibold uppercase tracking-wide text-offwhite/90">
                 <th className="px-6 py-4 text-center font-semibold">ID</th>
                 <th className="px-6 py-4 text-center font-semibold">Imagem</th>
                 <th className="px-6 py-4 font-semibold">Nome</th>
@@ -178,89 +171,9 @@ export default function Tabela({ produtos, total }: TabelaProps) {
               ))}
             </tbody>
           </table>
-
-          {/* TABLET */}
-          <div className="hidden gap-4 p-4 sm:grid sm:grid-cols-2 sm:p-6 lg:hidden">
-            {produtos.map((produto) => (
-              <div
-                key={produto.id}
-                className="flex flex-col gap-3 rounded-xl bg-white/40 p-4 text-chocolate"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-md bg-white">
-                    <Image
-                      src={produto.image}
-                      alt={produto.title}
-                      width={56}
-                      height={56}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold">
-                      {produto.title}
-                    </p>
-                    <p className="text-xs text-chocolate/60">
-                      ID #{produto.id}
-                    </p>
-                    <p className="mt-1 text-sm font-medium">
-                      {formatarPreco(produto.price)}
-                    </p>
-                  </div>
-                </div>
-                <p className="text-xs leading-relaxed text-chocolate/80">
-                  {produto.description}
-                </p>
-                <div className="mt-1 border-t border-chocolate/10 pt-3">
-                  <AcoesProduto
-                    produto={produto}
-                    onVisualizar={handleVisualizar}
-                    onEditar={handleEditar}
-                    onExcluir={handleExcluir}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* MOBILE */}
-          <div className="flex flex-col gap-3 p-4 sm:hidden">
-            {produtos.map((produto) => (
-              <div
-                key={produto.id}
-                className="flex items-center gap-3 rounded-xl bg-white/40 p-3 text-chocolate"
-              >
-                <div className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-md bg-offwhite">
-                  <Image
-                    src={produto.image}
-                    alt={produto.title}
-                    width={56}
-                    height={56}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-semibold">
-                    {produto.title}
-                  </p>
-                  <p className="text-xs text-chocolate/60">
-                    #{produto.id} · {formatarPreco(produto.price)}
-                  </p>
-                  <p className="mt-0.5 truncate text-xs text-chocolate/70">
-                    {produto.description}
-                  </p>
-                </div>
-                <AcoesProduto
-                  produto={produto}
-                  onVisualizar={handleVisualizar}
-                  onEditar={handleEditar}
-                  onExcluir={handleExcluir}
-                />
-              </div>
-            ))}
-          </div>
         </div>
 
+        <PaginacaoTabela totalPages={totalPages} />
         {/* chamada dos modais de CRUD*/}
         <ModalVisualizar
           isOpen={isModalVisualizarOpen}

@@ -3,18 +3,42 @@
 import prisma from "@/src/lib/db";
 import { revalidatePath } from "next/cache";
 
-export async function getProdutos() {
-  const produtos = await prisma.product.findMany({
-    select: {
-      id: true,
-      image: true,
-      title: true,
-      description: true,
-      price: true,
-    },
-    orderBy: { id: "asc" },
-  });
-  return produtos;
+export async function getProdutos(
+  query?: string,
+  page: number = 1,
+  limit: number = 10
+) {
+  const skip = (page - 1) * limit;
+
+  const whereClause = query
+    ? {
+        OR: [
+          { title: { contains: query, mode: "insensitive" as const } },
+          { description: { contains: query, mode: "insensitive" as const } },
+        ],
+      }
+    : undefined;
+
+  const [products, totalCount] = await Promise.all([
+    prisma.product.findMany({
+      where: whereClause,
+      select: {
+        id: true,
+        image: true,
+        title: true,
+        description: true,
+        price: true,
+      },
+      skip,
+      take: limit,
+      orderBy: { id: "asc" },
+    }),
+    prisma.product.count({ where: whereClause }),
+  ]);
+
+  const totalPages = Math.ceil(totalCount / limit);
+
+  return { products, totalCount, totalPages, currentPage: page };
 }
 
 export async function CreateProduto(data: {

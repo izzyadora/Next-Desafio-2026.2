@@ -68,7 +68,7 @@ export default function Sidebar() {
           </div>
           {isOpen && (
             <>
-              <span className="text-sm whitespace-nowrap">{}</span>
+              <span className="text-sm whitespace-nowrap">{User.name}</span>
               <span className="text-xs text-offwhite/70 whitespace-nowrap">
                 email@gmail.com
               </span>
