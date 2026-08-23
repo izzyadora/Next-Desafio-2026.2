@@ -167,7 +167,6 @@ export default function PaginaCarrinho({
                   </div>
                 </div>
 
-                {/* botão de checkout */}
                 <button
                   type="button"
                   className="w-full bg-chocolate hover:bg-oliva text-creme font-medium py-3.5 rounded-xl transition-colors cursor-pointer"
