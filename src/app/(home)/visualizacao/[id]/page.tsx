@@ -25,7 +25,7 @@ export default async function Visualizacao({ params }: VisualizacaoProps) {
     return (
       <main>
         <div className="flex flex-col gap-0 m-0 p-0">
-          <PaginaVisualizacao product={product} />
+          <PaginaVisualizacao product={{...product, itemsCart: []}}/>
         </div>
       </main>
     );
