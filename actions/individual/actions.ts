@@ -8,3 +8,4 @@ export async function fetchProductByID(id: number) {
     });
     return product;
 }
+

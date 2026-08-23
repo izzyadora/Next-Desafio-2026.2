@@ -16,7 +16,7 @@ export async function FetchProdutos(id: number){
     return produto;
 }
 
-export async function getProdutos(query?: string, page: number = 1, limit: number = 24){
+export async function getProdutos(query?: string, page: number = 1, limit: number = 12){
     const skip = (page - 1) * limit;
     
     const whereClause = query ? {

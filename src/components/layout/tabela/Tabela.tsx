@@ -6,16 +6,15 @@ import {
   Pencil,
   Trash2,
   Plus,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
 import Image from "next/image";
-import { getProdutos } from "@/actions/produtos/actions";
 
 import ModalEditar from "./modais/ModalEditar";
 import ModalExcluir from "./modais/ModalExcluir";
 import ModalVisualizar from "./modais/ModalVisualizar";
 import ModalCriar from "./modais/ModalCriar";
+import PaginacaoTabela from "../../ui/PaginacaoTabela";
+import BuscaTabela from "../../ui/BuscaTabela"
 
 type Produto = {
   id: number;
