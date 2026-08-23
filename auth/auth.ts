@@ -2,20 +2,35 @@ import NextAuth from "next-auth";
 import { authConfig } from "./auth.config";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
-import { getUser, authenticate } from "@/actions/login/actions";
+import { getUser } from "@/actions/login/actions";
 import bcrypt from "bcryptjs";
 
-export const { auth, signIn, signOut } = NextAuth({
+export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   callbacks: {
     ...authConfig.callbacks,
     async jwt({ token, user }) {
       if (user) {
-        token.role = user.role; // vem do authorize()
+        token.role = user.role;
+        return token;
       }
+
+      if (token.email) {
+        const dbUser = await getUser(token.email as string);
+
+        if (!dbUser) {
+          return {}; 
+        }
+        token.role = dbUser.role;
+      }
+
       return token;
     },
     async session({ session, token }) {
+      if (!token || !token.email) {
+        return null as any;
+      }
+
       if (session.user) {
         session.user.role = token.role as string;
       }
