@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { signOut } from "@/auth";
 import {
   SquareArrowRightExit,
   Menu,
@@ -66,12 +67,17 @@ export default function Sidebar() {
           )}
 
           {isOpen && (
-            <Link href="/">
+            <form
+              action={async () => {
+                "use server";
+                await signOut({ redirectTo: "/" });
+              }}
+            >
               <button className="flex items-center gap-2 bg-offwhite text-chocolate rounded-4xl px-4 py-2 mt-4 hover:bg-creme hover:cursor-pointer transition-colors">
                 <SquareArrowRightExit className="h-5 w-5 shrink-0" />
                 <span className="whitespace-nowrap">Sair</span>
               </button>
-            </Link>
+            </form>
           )}
         </div>
       </div>

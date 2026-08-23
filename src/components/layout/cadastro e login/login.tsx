@@ -1,12 +1,22 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useActionState } from "react";
+import { authenticate, registerUser } from "@/actions/login/actions"; // ajuste o caminho conforme seu projeto
 
 export default function Login() {
   const [mode, setMode] = useState<"login" | "cadastro">("login");
   const isLogin = mode === "login";
+
+  const [loginError, loginAction, isLoginPending] = useActionState(
+    authenticate,
+    undefined,
+  );
+
+  const [cadastroState, cadastroAction, isCadastroPending] = useActionState(
+    registerUser,
+    undefined,
+  );
 
   return (
     <div className="bg-militar-300 z-[-1] w-full min-h-screen absolute p-4 sm:p-8 md:p-12 lg:p-24">
@@ -35,7 +45,7 @@ export default function Login() {
           >
             <div key={mode} className="flex flex-col gap-4 animate-fade-in">
               {isLogin ? (
-                <>
+                <form action={loginAction} className="flex flex-col gap-4">
                   <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-source-serif flex justify-center">
                     Login
                   </h1>
@@ -47,6 +57,7 @@ export default function Login() {
                     id="email"
                     name="email"
                     placeholder="Digite seu email"
+                    required
                   />
 
                   <label htmlFor="senha">Senha</label>
@@ -56,7 +67,14 @@ export default function Login() {
                     id="senha"
                     name="senha"
                     placeholder="Digite sua senha"
+                    required
                   />
+
+                  {loginError && (
+                    <p className="text-red-600 text-sm text-center" role="alert">
+                      {loginError}
+                    </p>
+                  )}
 
                   <p className="w-full text-center text-militar-300">
                     Não tem uma conta?{" "}
@@ -69,17 +87,33 @@ export default function Login() {
                     </button>
                   </p>
 
-                  <Link href="/tabela">
-                    <button
-                      className="bg-militar-500 text-creme py-3 w-full rounded-3xl hover:bg-militar-300 transition-colors"
-                      type="submit"
-                    >
-                      Entrar
-                    </button>
-                  </Link>
-                </>
+                  <button
+                    className="bg-militar-500 text-creme py-3 w-full rounded-3xl hover:bg-militar-300 transition-colors disabled:opacity-60"
+                    type="submit"
+                    disabled={isLoginPending}
+                  >
+                    {isLoginPending ? "Entrando..." : "Entrar"}
+                  </button>
+                </form>
+              ) : cadastroState?.success ? (
+                <div className="flex flex-col gap-4 items-center text-center">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-source-serif">
+                    Cadastro
+                  </h1>
+                  <p className="text-chocolate">
+                    Cadastro realizado com sucesso! Agora você já pode fazer
+                    login.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setMode("login")}
+                    className="bg-militar-500 text-creme py-3 w-full rounded-3xl hover:bg-militar-300 transition-colors"
+                  >
+                    Ir para o login
+                  </button>
+                </div>
               ) : (
-                <>
+                <form action={cadastroAction} className="flex flex-col gap-4">
                   <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-source-serif flex justify-center">
                     Cadastro
                   </h1>
@@ -91,6 +125,7 @@ export default function Login() {
                     id="nome"
                     name="nome"
                     placeholder="Digite seu nome completo"
+                    required
                   />
 
                   <label htmlFor="email">Email</label>
@@ -100,6 +135,7 @@ export default function Login() {
                     id="email"
                     name="email"
                     placeholder="Digite seu email"
+                    required
                   />
 
                   <label htmlFor="senha">Senha</label>
@@ -109,6 +145,7 @@ export default function Login() {
                     id="senha"
                     name="senha"
                     placeholder="Digite sua senha"
+                    required
                   />
 
                   <label htmlFor="confirmar-senha">Confirmar Senha</label>
@@ -118,7 +155,14 @@ export default function Login() {
                     id="confirmar-senha"
                     name="confirmar-senha"
                     placeholder="Confirme sua senha"
+                    required
                   />
+
+                  {cadastroState?.error && (
+                    <p className="text-red-600 text-sm text-center" role="alert">
+                      {cadastroState.error}
+                    </p>
+                  )}
 
                   <p className="w-full text-center text-militar-300">
                     Já tem uma conta?{" "}
@@ -130,14 +174,15 @@ export default function Login() {
                       Faça login
                     </button>
                   </p>
-                    <button
-                      className="bg-militar-500 text-creme py-3 w-full rounded-3xl hover:bg-militar-300 transition-colors"
-                      onClick={() => setMode("login")}
-                      type="submit"
-                    >
-                      Cadastrar
-                    </button>
-                </>
+
+                  <button
+                    className="bg-militar-500 text-creme py-3 w-full rounded-3xl hover:bg-militar-300 transition-colors disabled:opacity-60"
+                    type="submit"
+                    disabled={isCadastroPending}
+                  >
+                    {isCadastroPending ? "Cadastrando..." : "Cadastrar"}
+                  </button>
+                </form>
               )}
             </div>
           </div>
