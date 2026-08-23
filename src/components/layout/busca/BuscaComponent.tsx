@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BuscaAuxiliar from "./BuscaAuxiliar";
+import BuscaAuxiliar from "@/src/components/layout/busca/BuscaAuxiliar";
 import { HeartCrack } from "lucide-react";
 
 export default function Busca() {
