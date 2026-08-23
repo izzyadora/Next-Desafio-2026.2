@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { updateCartItem, removeFromCart } from "@/actions/carrinho/actions";
 
-interface ItemCarrinho {
+type ItemCarrinho = {
   id: number;
   nome: string;
   imagemUrl: string;
@@ -16,6 +16,9 @@ interface ItemCarrinho {
 
 const formataDinheiro = (valor: number) =>
   valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+
+//Começo da função
 
 export default function PaginaCarrinho({
   itensIniciais,

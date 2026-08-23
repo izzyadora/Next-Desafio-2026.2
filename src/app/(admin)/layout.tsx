@@ -7,10 +7,12 @@ export default function PublicLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section className="flex min-h-screen">
+    <div className="flex min-h-screen">
       <Sidebar />
-      <main className="flex-1 overflow-y-auto">{children}</main>
-      <Footer />
-    </section>
+      <div className="flex flex-col flex-1 min-w-0">
+        <main className="flex-1 overflow-y-auto">{children}</main>
+        <Footer />
+      </div>
+    </div>
   );
 }
