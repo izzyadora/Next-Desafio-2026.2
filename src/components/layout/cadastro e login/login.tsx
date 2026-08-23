@@ -60,12 +60,12 @@ export default function Login() {
                     required
                   />
 
-                  <label htmlFor="senha">Senha</label>
+                  <label htmlFor="password">Senha</label>
                   <input
                     className="bg-offwhite px-4 py-2 rounded-3xl border chocolate"
                     type="password"
-                    id="senha"
-                    name="senha"
+                    id="password"
+                    name="password"
                     placeholder="Digite sua senha"
                     required
                   />

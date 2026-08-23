@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { signOut } from "@/auth";
+import { logOut } from "@/actions/login/actions";
 import {
   SquareArrowRightExit,
   Menu,
@@ -14,6 +14,15 @@ import {
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
 
+  type User = {
+    id: number;
+    name: string;
+    email: string;
+  }
+
+  async function handleLogout() {
+    await logOut();
+  }
   return (
     <div className="bg-transparent sticky top-0 h-screen shrink-0">
       <div
@@ -59,7 +68,7 @@ export default function Sidebar() {
           </div>
           {isOpen && (
             <>
-              <span className="text-sm whitespace-nowrap">Seu Nome</span>
+              <span className="text-sm whitespace-nowrap">{}</span>
               <span className="text-xs text-offwhite/70 whitespace-nowrap">
                 email@gmail.com
               </span>
@@ -67,17 +76,12 @@ export default function Sidebar() {
           )}
 
           {isOpen && (
-            <form
-              action={async () => {
-                "use server";
-                await signOut({ redirectTo: "/" });
-              }}
-            >
-              <button className="flex items-center gap-2 bg-offwhite text-chocolate rounded-4xl px-4 py-2 mt-4 hover:bg-creme hover:cursor-pointer transition-colors">
+            <Link href="/">
+              <button className="flex items-center gap-2 bg-offwhite text-chocolate rounded-4xl px-4 py-2 mt-4 hover:bg-creme hover:cursor-pointer transition-colors" onClick={handleLogout}>
                 <SquareArrowRightExit className="h-5 w-5 shrink-0" />
                 <span className="whitespace-nowrap">Sair</span>
               </button>
-            </form>
+            </Link>
           )}
         </div>
       </div>

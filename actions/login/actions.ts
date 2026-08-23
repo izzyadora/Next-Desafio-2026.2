@@ -5,6 +5,7 @@ import prisma from "@/src/lib/db";
 import type { User } from "@/types/data";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
+import { signOut } from "@/auth";
 
 export async function getUser(email: string): Promise<User | null> {
   const user = await prisma.user.findUnique({
@@ -91,4 +92,8 @@ export async function registerUser(
   }
 
   return { success: true };
+}
+
+export async function logOut() {
+  await signOut({ redirectTo: "/" });
 }
