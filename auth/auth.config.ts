@@ -1,15 +1,5 @@
 import type { NextAuthConfig } from 'next-auth';
-
-declare module 'next-auth' {
-  interface User {
-    role: 'ADMIN' | 'USER';
-  }
-  interface Session {
-    user: {
-      role: 'ADMIN' | 'USER';
-    } & User;
-  }
-}
+import type { UserRole } from '@/types/next-auth'; 
 
 export const authConfig = {
   pages: {
@@ -24,7 +14,7 @@ export const authConfig = {
     },
     async session({ session, token }) {
       if (session.user && token.role) {
-        session.user.role = token.role as 'ADMIN' | 'USER';
+        session.user.role = token.role as UserRole;
       }
       return session;
     },
@@ -40,7 +30,7 @@ export const authConfig = {
         if (isLoggedIn) {
           return Response.redirect(new URL('/', nextUrl));
         }
-        return false; 
+        return false;
       }
       if (isOnLogin && isLoggedIn) {
         const destination = isAdmin ? '/tabela' : '/';
