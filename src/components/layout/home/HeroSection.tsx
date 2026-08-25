@@ -4,7 +4,7 @@ import InfoCard from "@/src/components/ui/CardInformacao";
 
 export default function Hero() {
   return (
-    <section className="bg-offwhite text-creme w-full flex flex-col items-center justify-center min-h-[80vh] gap-16 px-4 py-24 sm:px-8 border-b border-chocolate/20">
+    <section className="bg-offwhite text-creme w-full flex flex-col items-center justify-center min-h-[80vh] gap-16 px-4 py-24 sm:px-16 border-b border-chocolate/20">
       <div className="lg:min-w-xs max-lg:w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Lado Esquerdo */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left gap-6 max-w-lg mx-auto md:mx-0">
